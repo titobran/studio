@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Turtle, UserCircle, LogOut, Settings, HelpCircle, Announce } from 'lucide-react'; // Added UserCircle and other icons
+import { Turtle, UserCircle, LogOut, Settings, HelpCircle, Megaphone } from 'lucide-react'; // Replaced Announce with Megaphone
 import { ThemeToggleButton } from '@/components/ui/theme-toggle-button';
 import {
   DropdownMenu,
@@ -66,7 +66,7 @@ export default function Navbar() {
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link href="/whats-new" className="flex items-center">
-                  <Announce className="mr-2 h-4 w-4" /> {/* Using Announce as placeholder for Novedades */}
+                  <Megaphone className="mr-2 h-4 w-4" /> {/* Using Megaphone for Novedades */}
                   <span>Novedades</span>
                 </Link>
               </DropdownMenuItem>
