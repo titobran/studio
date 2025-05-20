@@ -48,6 +48,10 @@
     --sidebar-accent-foreground: 0 0% 3.9%;
     --sidebar-border: 0 0% 89.8%;
     --sidebar-ring: 172 56% 39%;
+
+    /* Custom Gold Colors */
+    --custom-gold-button-bg: 40 90% 50%; /* Gold like #F2C60D */
+    --custom-gold-button-text: 0 0% 10%;   /* Dark text for on-gold buttons */
   }
 
   .dark {
@@ -94,6 +98,10 @@
     --sidebar-accent-foreground: 0 0% 5%;
     --sidebar-border: 210 10% 15%;
     --sidebar-ring: 172 56% 45%;
+
+    /* Custom Gold Colors for Dark Mode */
+    --custom-gold-button-bg: 40 90% 55%; /* Slightly brighter gold for dark mode */
+    --custom-gold-button-text: 0 0% 10%;   /* Dark text for on-gold buttons */
   }
 }
 

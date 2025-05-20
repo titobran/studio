@@ -59,7 +59,9 @@ export default {
   				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
   				border: 'hsl(var(--sidebar-border))',
   				ring: 'hsl(var(--sidebar-ring))'
-  			}
+  			},
+        'custom-gold-button-bg': 'hsl(var(--custom-gold-button-bg))',
+        'custom-gold-button-text': 'hsl(var(--custom-gold-button-text))',
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
