@@ -97,6 +97,7 @@ export default function MTMPage() {
         <div className="container mx-auto flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
           <div className="flex items-center space-x-2">
             <Fish className="h-5 w-5 text-primary" />
+            <span className="font-semibold text-primary">MTM</span>
             <span className="text-sm text-muted-foreground">Your Gateway to the Digital Ocean</span>
           </div>
           <div className="flex items-center space-x-3">
