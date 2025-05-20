@@ -12,7 +12,56 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { Fish, ThumbsUp, ThumbsDown, Loader2 } from 'lucide-react';
+import { Fish, ThumbsUp, ThumbsDown, Loader2, Leaf, Newspaper, ShoppingBag, FlaskConical } from 'lucide-react';
+
+interface ContentSection {
+  id: string;
+  title: string;
+  description: string;
+  icon: React.ElementType;
+  href: string;
+  imgPlaceholder?: string;
+  dataAiHint?: string;
+}
+
+const contentSections: ContentSection[] = [
+  {
+    id: 'species',
+    title: 'Especies Marinas',
+    description: 'Descubre la diversidad de la vida en nuestros océanos, desde el plancton microscópico hasta las ballenas gigantes.',
+    icon: Leaf,
+    href: '/species',
+    imgPlaceholder: 'https://placehold.co/600x400.png',
+    dataAiHint: 'coral reef',
+  },
+  {
+    id: 'news',
+    title: 'Noticias del Océano',
+    description: 'Mantente al día con los últimos descubrimientos, esfuerzos de conservación y eventos relacionados con el mundo marino.',
+    icon: Newspaper,
+    href: '/news',
+    imgPlaceholder: 'https://placehold.co/600x400.png',
+    dataAiHint: 'ocean waves',
+  },
+  {
+    id: 'products',
+    title: 'Productos Sostenibles',
+    description: 'Explora productos y servicios que apoyan la salud de los océanos y promueven prácticas sostenibles.',
+    icon: ShoppingBag,
+    href: '/products',
+    imgPlaceholder: 'https://placehold.co/600x400.png',
+    dataAiHint: 'eco friendly',
+  },
+  {
+    id: 'research',
+    title: 'Estudios Científicos',
+    description: 'Sumérgete en investigaciones y estudios científicos sobre oceanografía, biología marina y cambio climático.',
+    icon: FlaskConical,
+    href: '/research',
+    imgPlaceholder: 'https://placehold.co/600x400.png',
+    dataAiHint: 'science laboratory',
+  },
+];
 
 export default function MTMPage() {
   const [phrase, setPhrase] = useState<string>('');
@@ -182,6 +231,47 @@ export default function MTMPage() {
             )}
           </Card>
         )}
+      </div>
+
+      {/* Content Sections */}
+      <div className="w-full max-w-5xl mt-16 space-y-12">
+        <header className="text-center">
+          <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">
+            Explore the Marine World
+          </h2>
+          <p className="mt-2 text-lg text-muted-foreground">
+            Discover more about our oceans and how you can contribute.
+          </p>
+        </header>
+        <div className="grid gap-8 md:grid-cols-2">
+          {contentSections.map((section) => (
+            <Card key={section.id} className="shadow-lg rounded-xl overflow-hidden flex flex-col">
+              {section.imgPlaceholder && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img 
+                  src={section.imgPlaceholder} 
+                  alt={section.title} 
+                  className="w-full h-48 object-cover"
+                  data-ai-hint={section.dataAiHint || "ocean"}
+                />
+              )}
+              <CardHeader>
+                <CardTitle className="text-xl sm:text-2xl flex items-center">
+                  <section.icon className="h-6 w-6 mr-2 text-primary" />
+                  {section.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <p className="text-muted-foreground">{section.description}</p>
+              </CardContent>
+              <CardFooter>
+                <Button asChild variant="outline" className="w-full sm:w-auto">
+                  <Link href={section.href}>Learn More</Link>
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
       </div>
     </div>
   );
