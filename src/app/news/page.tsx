@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Newspaper } from 'lucide-react';
+import { useState } from 'react'; // Import useState
+import { Input } from '@/components/ui/input'; // Import Input
 
 interface NewsArticle {
   id: string;
@@ -62,6 +64,13 @@ const newsArticles: NewsArticle[] = [
 ];
 
 export default function NewsPage() {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredArticles = newsArticles.filter(article =>
+    article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    article.summary.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="container mx-auto px-4 py-12">
       <header className="text-center mb-12">
@@ -76,43 +85,59 @@ export default function NewsPage() {
         </p>
       </header>
 
+      <div className="mb-8 max-w-xl mx-auto">
+        <Input
+          type="text"
+          placeholder="Buscar noticias por título o resumen..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full text-base shadow-sm"
+        />
+      </div>
+
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-1"> {/* Single column for better readability of news items */}
-        {newsArticles.map((article) => (
-          <Card
-            key={article.id}
-            className="flex flex-col md:flex-row rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl overflow-hidden"
-          >
-            <div className="md:w-1/3 h-48 md:h-auto overflow-hidden">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={article.imageUrl}
-                alt={article.title}
-                className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                data-ai-hint={article.dataAiHint}
-              />
-            </div>
-            <div className="md:w-2/3 flex flex-col">
-              <CardHeader className="p-6">
-                <CardTitle className="text-xl font-semibold hover:text-primary transition-colors">
-                  <Link href={article.articleUrl}>{article.title}</Link>
-                </CardTitle>
-                <CardDescription className="text-xs text-muted-foreground pt-1">
-                  Publicado el {article.publicationDate} por {article.source}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="flex-grow p-6 pt-0">
-                <p className="text-sm text-muted-foreground line-clamp-3">
-                  {article.summary}
-                </p>
-              </CardContent>
-              <CardFooter className="p-6 pt-0">
-                <Button asChild variant="outline" size="sm">
-                  <Link href={article.articleUrl}>Leer Más</Link>
-                </Button>
-              </CardFooter>
-            </div>
-          </Card>
-        ))}
+        {filteredArticles.length > 0 ? (
+          filteredArticles.map((article) => (
+            <Card
+              key={article.id}
+              className="flex flex-col md:flex-row rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl overflow-hidden"
+            >
+              <div className="md:w-1/3 h-48 md:h-auto overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={article.imageUrl}
+                  alt={article.title}
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                  data-ai-hint={article.dataAiHint}
+                />
+              </div>
+              <div className="md:w-2/3 flex flex-col">
+                <CardHeader className="p-6">
+                  <CardTitle className="text-xl font-semibold hover:text-primary transition-colors">
+                    <Link href={article.articleUrl}>{article.title}</Link>
+                  </CardTitle>
+                  <CardDescription className="text-xs text-muted-foreground pt-1">
+                    Publicado el {article.publicationDate} por {article.source}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="flex-grow p-6 pt-0">
+                  <p className="text-sm text-muted-foreground line-clamp-3">
+                    {article.summary}
+                  </p>
+                </CardContent>
+                <CardFooter className="p-6 pt-0">
+                  <Button asChild variant="outline" size="sm">
+                    <Link href={article.articleUrl}>Leer Más</Link>
+                  </Button>
+                </CardFooter>
+              </div>
+            </Card>
+          ))
+        ) : (
+          <p className="text-center text-muted-foreground col-span-full py-10 text-lg">
+            No se encontraron noticias que coincidan con &quot;{searchTerm}&quot;.
+          </p>
+        )}
       </div>
 
       <div className="mt-16 text-center">
