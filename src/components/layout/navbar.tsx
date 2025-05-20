@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Turtle } from 'lucide-react';
-import { ThemeToggleButton } from '@/components/ui/theme-toggle-button'; // Added ThemeToggleButton import
+import { ThemeToggleButton } from '@/components/ui/theme-toggle-button';
 
 export default function Navbar() {
   return (
@@ -20,16 +20,16 @@ export default function Navbar() {
         <div className="flex items-center space-x-1 sm:space-x-2"> {/* Reduced space-x for tighter packing */}
           <ThemeToggleButton /> {/* Added ThemeToggleButton */}
           <Button variant="secondary" size="sm" asChild>
-            <Link href="/register">Regístrate</Link>
+            <span><Link href="/register">Regístrate</Link></span>
           </Button>
           <Button variant="default" size="sm" asChild>
-            <Link href="/login">Iniciar Sesión</Link>
+            <span><Link href="/login">Iniciar Sesión</Link></span>
           </Button>
           <Button variant="link" size="sm" asChild>
-            <Link href="/credits">Créditos</Link> {/* Assuming /credits page exists or will be created */}
+            <span><Link href="/credits">Créditos</Link></span>
           </Button>
           <Button variant="default" size="sm" className="bg-accent hover:bg-accent/90 text-accent-foreground" asChild>
-            <Link href="/premium">Premium</Link>
+            <span><Link href="/premium">Premium</Link></span>
           </Button>
         </div>
       </div>
