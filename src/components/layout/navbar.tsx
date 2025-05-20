@@ -4,12 +4,14 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Fish } from 'lucide-react';
+import { SidebarTrigger } from '@/components/ui/sidebar';
 
 export default function Navbar() {
   return (
     <nav className="w-full border-b border-border shadow-sm sticky top-0 bg-background z-50">
       <div className="container mx-auto flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
         <div className="flex items-center space-x-2">
+          <SidebarTrigger className="mr-2 data-[sidebar=trigger]:text-primary lg:hidden" /> {/* Hidden on lg screens and up if sidebar is docked */}
           <Fish className="h-5 w-5 text-primary" />
           <Link href="/" className="font-semibold text-primary">
             MTM
@@ -34,4 +36,3 @@ export default function Navbar() {
     </nav>
   );
 }
-
