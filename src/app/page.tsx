@@ -12,6 +12,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Fish, ThumbsUp, ThumbsDown, Loader2 } from 'lucide-react'; // Changed Globe to Fish
+// Optional icons for nav: import { UserPlus, LogIn as LogInIcon, Award, Star } from 'lucide-react';
 
 export default function MTMPage() {
   const [phrase, setPhrase] = useState<string>('');
@@ -92,96 +93,119 @@ export default function MTMPage() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-background p-4 sm:p-8 selection:bg-primary/20 selection:text-primary">
-      <div className="w-full max-w-2xl space-y-8">
-        <header className="text-center">
-          <div className="inline-flex items-center gap-3 mb-4 text-primary">
-            <Fish className="h-10 w-10 sm:h-12 sm:w-12" /> {/* Changed Globe to Fish */}
-            <h1 className="text-4xl sm:text-5xl font-bold">MTM</h1>
-          </div>
-          <p className="text-muted-foreground text-md sm:text-lg">
-            Your Universal Language Translator
-          </p>
-        </header>
+    <div className="min-h-screen flex flex-col bg-background selection:bg-primary/20 selection:text-primary">
+      <nav className="w-full border-b border-border shadow-sm sticky top-0 bg-background z-50">
+        <div className="container mx-auto flex items-center justify-end h-16 px-4 sm:px-6 lg:px-8 space-x-3">
+          <Button variant="ghost" size="sm">
+            {/* <UserPlus className="mr-2 h-4 w-4" /> */}
+            Register
+          </Button>
+          <Button variant="outline" size="sm">
+            {/* <LogInIcon className="mr-2 h-4 w-4" /> */}
+            Log In
+          </Button>
+          <Button variant="ghost" size="sm">
+            {/* <Award className="mr-2 h-4 w-4" /> */}
+            Credits
+          </Button>
+          <Button variant="default" size="sm" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+            {/* <Star className="mr-2 h-4 w-4" /> */}
+            Premium
+          </Button>
+        </div>
+      </nav>
 
-        <Card className="shadow-lg rounded-xl overflow-hidden">
-          <CardHeader>
-            <CardTitle className="text-xl sm:text-2xl">Enter Phrase to Translate</CardTitle>
-            <CardDescription>
-              Type or paste any phrase, and we'll translate it into English for you.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleTranslate}>
-              <Textarea
-                value={phrase}
-                onChange={(e) => setPhrase(e.target.value)}
-                placeholder="E.g., Hola Mundo, Bonjour le monde, Hallo Welt..."
-                className="min-h-[100px] text-base focus:ring-accent"
-                disabled={isLoading}
-                aria-label="Phrase to translate"
-              />
-              <Button type="submit" className="mt-4 w-full text-lg py-6" disabled={isLoading}>
-                {isLoading ? (
-                  <>
-                    <Loader2 className="mr-2 h-5 w-5 animate-spin" /> Translating...
-                  </>
-                ) : (
-                  "Translate"
-                )}
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
+      <main className="flex-grow flex flex-col items-center justify-center p-4 sm:p-8">
+        <div className="w-full max-w-2xl space-y-8">
+          <header className="text-center">
+            <div className="inline-flex items-center gap-3 mb-4 text-primary">
+              <Fish className="h-10 w-10 sm:h-12 sm:w-12" />
+              <h1 className="text-4xl sm:text-5xl font-bold">MTM</h1>
+            </div>
+            <p className="text-muted-foreground text-md sm:text-lg">
+              Your Universal Language Translator
+            </p>
+          </header>
 
-        {(translation || isLoading || error) && (
           <Card className="shadow-lg rounded-xl overflow-hidden">
             <CardHeader>
-              <CardTitle className="text-xl sm:text-2xl">English Translation</CardTitle>
+              <CardTitle className="text-xl sm:text-2xl">Enter Phrase to Translate</CardTitle>
+              <CardDescription>
+                Type or paste any phrase, and we'll translate it into English for you.
+              </CardDescription>
             </CardHeader>
-            <CardContent className="min-h-[80px] text-foreground">
-              {isLoading && !translation && (
-                <div className="flex items-center justify-center text-muted-foreground">
-                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                  <p>Translating your phrase...</p>
-                </div>
-              )}
-              {error && <p className="text-destructive text-center">{error}</p>}
-              {translation && !error && <p className="text-lg sm:text-xl p-2 bg-secondary/50 rounded-md">{translation}</p>}
-              {!isLoading && !translation && !error && (
-                <p className="text-muted-foreground text-center">Translation will appear here once you submit a phrase.</p>
-              )}
+            <CardContent>
+              <form onSubmit={handleTranslate}>
+                <Textarea
+                  value={phrase}
+                  onChange={(e) => setPhrase(e.target.value)}
+                  placeholder="E.g., Hola Mundo, Bonjour le monde, Hallo Welt..."
+                  className="min-h-[100px] text-base focus:ring-accent"
+                  disabled={isLoading}
+                  aria-label="Phrase to translate"
+                />
+                <Button type="submit" className="mt-4 w-full text-lg py-6" disabled={isLoading}>
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="mr-2 h-5 w-5 animate-spin" /> Translating...
+                    </>
+                  ) : (
+                    "Translate"
+                  )}
+                </Button>
+              </form>
             </CardContent>
-            {translation && !error && (
-              <CardFooter className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 border-t pt-6">
-                <p className="text-sm text-muted-foreground">Was this translation helpful?</p>
-                <div className="flex space-x-3">
-                  <Button
-                    variant={feedbackState === 'up' ? 'default' : 'outline'}
-                    size="lg"
-                    onClick={() => handleFeedback('thumbs_up')}
-                    disabled={isFeedbackSubmitting || feedbackState !== null}
-                    aria-label="Helpful translation"
-                    className={`transition-all duration-150 ease-in-out transform hover:scale-105 ${feedbackState === 'up' ? 'bg-primary text-primary-foreground ring-2 ring-primary ring-offset-2' : 'hover:bg-primary/10'}`}
-                  >
-                    <ThumbsUp className="h-5 w-5 mr-2" /> Good
-                  </Button>
-                  <Button
-                    variant={feedbackState === 'down' ? 'destructive' : 'outline'}
-                    size="lg"
-                    onClick={() => handleFeedback('thumbs_down')}
-                    disabled={isFeedbackSubmitting || feedbackState !== null}
-                    aria-label="Not helpful translation"
-                     className={`transition-all duration-150 ease-in-out transform hover:scale-105 ${feedbackState === 'down' ? 'bg-destructive text-destructive-foreground ring-2 ring-destructive ring-offset-2' : 'hover:bg-destructive/10'}`}
-                  >
-                    <ThumbsDown className="h-5 w-5 mr-2" /> Bad
-                  </Button>
-                </div>
-              </CardFooter>
-            )}
           </Card>
-        )}
-      </div>
-    </main>
+
+          {(translation || isLoading || error) && (
+            <Card className="shadow-lg rounded-xl overflow-hidden">
+              <CardHeader>
+                <CardTitle className="text-xl sm:text-2xl">English Translation</CardTitle>
+              </CardHeader>
+              <CardContent className="min-h-[80px] text-foreground">
+                {isLoading && !translation && (
+                  <div className="flex items-center justify-center text-muted-foreground">
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    <p>Translating your phrase...</p>
+                  </div>
+                )}
+                {error && <p className="text-destructive text-center">{error}</p>}
+                {translation && !error && <p className="text-lg sm:text-xl p-2 bg-secondary/50 rounded-md">{translation}</p>}
+                {!isLoading && !translation && !error && (
+                  <p className="text-muted-foreground text-center">Translation will appear here once you submit a phrase.</p>
+                )}
+              </CardContent>
+              {translation && !error && (
+                <CardFooter className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 border-t pt-6">
+                  <p className="text-sm text-muted-foreground">Was this translation helpful?</p>
+                  <div className="flex space-x-3">
+                    <Button
+                      variant={feedbackState === 'up' ? 'default' : 'outline'}
+                      size="lg"
+                      onClick={() => handleFeedback('thumbs_up')}
+                      disabled={isFeedbackSubmitting || feedbackState !== null}
+                      aria-label="Helpful translation"
+                      className={`transition-all duration-150 ease-in-out transform hover:scale-105 ${feedbackState === 'up' ? 'bg-primary text-primary-foreground ring-2 ring-primary ring-offset-2' : 'hover:bg-primary/10'}`}
+                    >
+                      <ThumbsUp className="h-5 w-5 mr-2" /> Good
+                    </Button>
+                    <Button
+                      variant={feedbackState === 'down' ? 'destructive' : 'outline'}
+                      size="lg"
+                      onClick={() => handleFeedback('thumbs_down')}
+                      disabled={isFeedbackSubmitting || feedbackState !== null}
+                      aria-label="Not helpful translation"
+                       className={`transition-all duration-150 ease-in-out transform hover:scale-105 ${feedbackState === 'down' ? 'bg-destructive text-destructive-foreground ring-2 ring-destructive ring-offset-2' : 'hover:bg-destructive/10'}`}
+                    >
+                      <ThumbsDown className="h-5 w-5 mr-2" /> Bad
+                    </Button>
+                  </div>
+                </CardFooter>
+              )}
+            </Card>
+          )}
+        </div>
+      </main>
+    </div>
   );
 }
