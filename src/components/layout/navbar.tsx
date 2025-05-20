@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Fish } from 'lucide-react';
+import { Turtle } from 'lucide-react'; // Changed from Fish to Turtle
 // Removed SidebarTrigger import
 
 export default function Navbar() {
@@ -12,7 +12,7 @@ export default function Navbar() {
       <div className="container mx-auto flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
         <div className="flex items-center space-x-2">
           {/* <SidebarTrigger className="mr-2 data-[sidebar=trigger]:text-primary lg:hidden" /> Removed SidebarTrigger */}
-          <Fish className="h-5 w-5 text-primary" />
+          <Turtle className="h-5 w-5 text-primary" /> {/* Changed from Fish to Turtle */}
           <Link href="/" className="font-semibold text-primary">
             MTM
           </Link>
@@ -36,3 +36,4 @@ export default function Navbar() {
     </nav>
   );
 }
+

@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 // import { Textarea } from '@/components/ui/textarea'; // Removed as no longer used
 // import { useToast } from '@/hooks/use-toast'; // Removed as no longer used
-import { Fish, Leaf, Newspaper, ShoppingBag, FlaskConical } from 'lucide-react'; // Removed ThumbsUp, ThumbsDown, Loader2
+import { Turtle, Newspaper, ShoppingBag, FlaskConical } from 'lucide-react'; // Changed Fish to Turtle, removed ThumbsUp, ThumbsDown, Loader2
 
 interface ContentSection {
   id: string;
@@ -30,7 +30,7 @@ const contentSections: ContentSection[] = [
     id: 'species',
     title: 'Especies Marinas',
     description: 'Descubre la diversidad de la vida en nuestros océanos, desde el plancton microscópico hasta las ballenas gigantes.',
-    icon: Fish, // Changed from Leaf to Fish
+    icon: Turtle, // Changed from Fish (which was previously Leaf) to Turtle
     href: '/species',
     imgPlaceholder: 'https://placehold.co/600x400.png',
     dataAiHint: 'coral reef',
@@ -83,7 +83,7 @@ export default function MTMPage() {
       <div className="w-full max-w-2xl space-y-8">
         <header className="text-center">
           <div className="inline-flex items-center gap-3 mb-4 text-primary">
-            <Fish className="h-10 w-10 sm:h-12 sm:w-12" />
+            <Turtle className="h-10 w-10 sm:h-12 sm:w-12" /> {/* Changed from Fish to Turtle */}
             <h1 className="text-4xl sm:text-5xl font-bold">MTM</h1>
           </div>
           <p className="text-muted-foreground text-md sm:text-lg">
@@ -151,3 +151,4 @@ export default function MTMPage() {
     </div>
   );
 }
+
