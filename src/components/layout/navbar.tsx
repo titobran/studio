@@ -17,13 +17,13 @@ export default function Navbar() {
           <span className="text-sm text-muted-foreground hidden md:block">Your Gateway to the Digital Ocean</span>
         </div>
         <div className="flex items-center space-x-2 sm:space-x-3">
-          <Button variant="ghost" size="sm" asChild>
+          <Button variant="secondary" size="sm" asChild>
             <Link href="/register">Register</Link>
           </Button>
-          <Button variant="outline" size="sm" asChild>
+          <Button variant="default" size="sm" asChild>
             <Link href="/login">Log In</Link>
           </Button>
-          <Button variant="ghost" size="sm">
+          <Button variant="link" size="sm">
             Credits
           </Button>
           <Button variant="default" size="sm" className="bg-accent hover:bg-accent/90 text-accent-foreground" asChild>
