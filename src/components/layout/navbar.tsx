@@ -26,11 +26,12 @@ export default function Navbar() {
           <Button variant="ghost" size="sm">
             Credits
           </Button>
-          <Button variant="default" size="sm" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-            Premium
+          <Button variant="default" size="sm" className="bg-accent hover:bg-accent/90 text-accent-foreground" asChild>
+            <Link href="/premium">Premium</Link>
           </Button>
         </div>
       </div>
     </nav>
   );
 }
+
