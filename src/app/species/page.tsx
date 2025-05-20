@@ -5,7 +5,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Turtle, Star, Sparkles, VenetianMask, Whale } from 'lucide-react'; // Using VenetianMask for Mantis Shrimp as a placeholder
+import { Turtle, Star, Sparkles, VenetianMask, Anchor } from 'lucide-react'; // Using VenetianMask for Mantis Shrimp, Anchor for Whale
 
 interface MarineAnimal {
   id: string;
@@ -58,7 +58,7 @@ const marineAnimals: MarineAnimal[] = [
     id: 'whales',
     name: 'Ballenas',
     description: 'Aprende sobre los gigantes del océano, desde la ballena azul hasta las juguetonas jorobadas.',
-    icon: Whale,
+    icon: Anchor, // Using Anchor as a placeholder for Whale
     imageUrl: 'https://placehold.co/600x400.png',
     dataAiHint: 'whale ocean',
     detailsPageUrl: '/species/whales', // Placeholder link

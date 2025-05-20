@@ -30,7 +30,7 @@ const contentSections: ContentSection[] = [
     id: 'species',
     title: 'Especies Marinas',
     description: 'Descubre la diversidad de la vida en nuestros océanos, desde el plancton microscópico hasta las ballenas gigantes.',
-    icon: Leaf, // Consider changing to a more marine-specific icon if available e.g. Fish, Turtle, Crab
+    icon: Fish, // Changed from Leaf to Fish
     href: '/species',
     imgPlaceholder: 'https://placehold.co/600x400.png',
     dataAiHint: 'coral reef',
