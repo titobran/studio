@@ -36,24 +36,24 @@ export default function RegisterPage() {
     <div className="flex items-center justify-center py-12">
       <Card className="w-full max-w-md shadow-xl">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold">Create an Account</CardTitle>
-          <CardDescription>Enter your details below to get started.</CardDescription>
+          <CardTitle className="text-2xl font-bold">Crear una Cuenta</CardTitle>
+          <CardDescription>Ingresa tus detalles a continuación para comenzar.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <form onSubmit={handleRegister} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">Correo Electrónico</Label>
               <Input 
                 id="email" 
                 type="email" 
-                placeholder="you@example.com" 
+                placeholder="tu@ejemplo.com" 
                 required 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">Contraseña</Label>
               <Input 
                 id="password" 
                 type="password" 
@@ -64,7 +64,7 @@ export default function RegisterPage() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="confirm-password">Confirm Password</Label>
+              <Label htmlFor="confirm-password">Confirmar Contraseña</Label>
               <Input 
                 id="confirm-password" 
                 type="password" 
@@ -75,7 +75,7 @@ export default function RegisterPage() {
               />
             </div>
             <Button type="submit" className="w-full">
-              Create Account
+              Crear Cuenta
             </Button>
           </form>
           
@@ -85,34 +85,34 @@ export default function RegisterPage() {
             </div>
             <div className="relative flex justify-center text-xs uppercase">
               <span className="bg-background px-2 text-muted-foreground">
-                Or sign up with
+                O regístrate con
               </span>
             </div>
           </div>
 
           <div className="grid grid-cols-1 gap-3">
             <Button variant="outline" onClick={() => handleSocialLogin('Google')}>
-              <Chrome className="mr-2 h-4 w-4" /> Sign up with Google
+              <Chrome className="mr-2 h-4 w-4" /> Registrarse con Google
             </Button>
             <Button variant="outline" onClick={() => handleSocialLogin('Facebook')}>
-              <Facebook className="mr-2 h-4 w-4" /> Sign up with Facebook
+              <Facebook className="mr-2 h-4 w-4" /> Registrarse con Facebook
             </Button>
              <Button variant="outline" onClick={() => handleSocialLogin('Twitter')}>
-              <Twitter className="mr-2 h-4 w-4" /> Sign up with Twitter (X)
+              <Twitter className="mr-2 h-4 w-4" /> Registrarse con Twitter (X)
             </Button>
             <Button variant="outline" onClick={() => handleSocialLogin('Microsoft')}>
-              <AppWindow className="mr-2 h-4 w-4" /> Sign up with Microsoft
+              <AppWindow className="mr-2 h-4 w-4" /> Registrarse con Microsoft
             </Button>
             <Button variant="outline" onClick={() => handleSocialLogin('Yahoo')}>
-              <Mail className="mr-2 h-4 w-4" /> Sign up with Yahoo
+              <Mail className="mr-2 h-4 w-4" /> Registrarse con Yahoo
             </Button>
           </div>
         </CardContent>
         <CardFooter className="text-center text-sm">
           <p className="w-full">
-            Already have an account?{' '}
+            ¿Ya tienes una cuenta?{' '}
             <Link href="/login" className="font-medium text-primary hover:underline">
-              Log In
+              Inicia Sesión
             </Link>
           </p>
         </CardFooter>

@@ -27,54 +27,54 @@ interface Plan {
 const plans: Plan[] = [
   {
     id: "bronze",
-    title: "Bronze Seahorse",
-    description: "Get started with essential translation features.",
+    title: "Caballito de Mar Bronce",
+    description: "Comienza con funciones esenciales de la plataforma.",
     price: "$5",
-    pricePeriod: "/ month",
+    pricePeriod: "/ mes",
     features: [
-      { text: "Up to 1,000 translations/month", available: true },
-      { text: "Standard translation speed", available: true },
-      { text: "Basic feedback history", available: true },
-      { text: "Email support", available: true },
-      { text: "Priority support", available: false },
-      { text: "Access to new languages (beta)", available: false },
+      { text: "Hasta 1,000 consultas/mes", available: true },
+      { text: "Velocidad estándar", available: true },
+      { text: "Historial básico de actividad", available: true },
+      { text: "Soporte por correo electrónico", available: true },
+      { text: "Soporte prioritario", available: false },
+      { text: "Acceso a nuevas funciones (beta)", available: false },
     ],
-    cta: "Choose Bronze",
+    cta: "Elegir Bronce",
     icon: <CheckCircle className="h-6 w-6 text-primary" />,
   },
   {
     id: "silver",
-    title: "Silver Dolphin",
-    description: "More translations and faster performance.",
+    title: "Delfín de Plata",
+    description: "Más acceso y rendimiento mejorado.",
     price: "$15",
-    pricePeriod: "/ month",
+    pricePeriod: "/ mes",
     features: [
-      { text: "Up to 10,000 translations/month", available: true },
-      { text: "Enhanced translation speed", available: true },
-      { text: "Detailed feedback history", available: true },
-      { text: "Priority email support", available: true },
-      { text: "Priority support", available: true },
-      { text: "Access to new languages (beta)", available: false },
+      { text: "Hasta 10,000 consultas/mes", available: true },
+      { text: "Velocidad mejorada", available: true },
+      { text: "Historial detallado de actividad", available: true },
+      { text: "Soporte prioritario por correo electrónico", available: true },
+      { text: "Soporte prioritario", available: true },
+      { text: "Acceso a nuevas funciones (beta)", available: false },
     ],
-    cta: "Choose Silver",
+    cta: "Elegir Plata",
     highlight: true,
     icon: <Zap className="h-6 w-6 text-accent" />,
   },
   {
     id: "gold",
-    title: "Gold Whale",
-    description: "The ultimate translation experience for power users.",
+    title: "Ballena de Oro",
+    description: "La experiencia definitiva para usuarios avanzados.",
     price: "$30",
-    pricePeriod: "/ month",
+    pricePeriod: "/ mes",
     features: [
-      { text: "Unlimited translations", available: true },
-      { text: "Lightning-fast translation speed", available: true },
-      { text: "Comprehensive feedback history & analytics", available: true },
-      { text: "24/7 Priority support", available: true },
-      { text: "Priority support", available: true },
-      { text: "Early access to new languages (beta)", available: true },
+      { text: "Consultas ilimitadas", available: true },
+      { text: "Velocidad ultrarrápida", available: true },
+      { text: "Historial completo de actividad y análisis", available: true },
+      { text: "Soporte prioritario 24/7", available: true },
+      { text: "Soporte prioritario", available: true },
+      { text: "Acceso anticipado a nuevas funciones (beta)", available: true },
     ],
-    cta: "Choose Gold",
+    cta: "Elegir Oro",
     icon: <Crown className="h-6 w-6 text-yellow-500" />,
   },
 ];
@@ -84,10 +84,10 @@ export default function PremiumPage() {
     <div className="container mx-auto px-4 py-12">
       <header className="text-center mb-12">
         <h1 className="text-4xl font-bold tracking-tight text-primary sm:text-5xl">
-          Unlock Premium MTM Features
+          Desbloquea Funciones Premium de MTM
         </h1>
         <p className="mt-3 text-lg text-muted-foreground sm:mt-5 sm:text-xl">
-          Choose a plan that fits your needs and elevate your translation experience.
+          Elige un plan que se adapte a tus necesidades y mejora tu experiencia en MTM.
         </p>
       </header>
 
@@ -145,9 +145,9 @@ export default function PremiumPage() {
 
       <div className="mt-16 text-center">
         <p className="text-muted-foreground">
-          Need a custom solution or have questions?{" "}
+          ¿Necesitas una solución personalizada o tienes preguntas?{" "}
           <Link href="/contact" className="font-medium text-primary hover:underline">
-            Contact Us
+            Contáctanos
           </Link>
         </p>
       </div>

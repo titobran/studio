@@ -16,17 +16,17 @@ export default function Navbar() {
           <Link href="/" className="font-semibold text-primary">
             MTM
           </Link>
-          <span className="text-sm text-muted-foreground hidden md:block">Your Gateway to the Digital Ocean</span>
+          <span className="text-sm text-muted-foreground hidden md:block">Tu Portal al Océano Digital</span>
         </div>
         <div className="flex items-center space-x-2 sm:space-x-3">
           <Button variant="secondary" size="sm" asChild>
-            <Link href="/register">Register</Link>
+            <Link href="/register">Regístrate</Link>
           </Button>
           <Button variant="default" size="sm" asChild>
-            <Link href="/login">Log In</Link>
+            <Link href="/login">Iniciar Sesión</Link>
           </Button>
           <Button variant="link" size="sm">
-            Credits
+            Créditos
           </Button>
           <Button variant="default" size="sm" className="bg-accent hover:bg-accent/90 text-accent-foreground" asChild>
             <Link href="/premium">Premium</Link>

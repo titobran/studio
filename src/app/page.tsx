@@ -30,7 +30,7 @@ const contentSections: ContentSection[] = [
     id: 'species',
     title: 'Especies Marinas',
     description: 'Descubre la diversidad de la vida en nuestros océanos, desde el plancton microscópico hasta las ballenas gigantes.',
-    icon: Leaf,
+    icon: Leaf, // Consider changing to a more marine-specific icon if available e.g. Fish, Turtle, Crab
     href: '/species',
     imgPlaceholder: 'https://placehold.co/600x400.png',
     dataAiHint: 'coral reef',
@@ -87,7 +87,7 @@ export default function MTMPage() {
             <h1 className="text-4xl sm:text-5xl font-bold">MTM</h1>
           </div>
           <p className="text-muted-foreground text-md sm:text-lg">
-            Your Gateway to the Digital Ocean {/* Updated motto, or can be more generic if translator is gone */}
+            Tu Portal al Océano Digital
           </p>
         </header>
 
@@ -112,10 +112,10 @@ export default function MTMPage() {
       <div className="w-full max-w-5xl mt-16 space-y-12">
         <header className="text-center">
           <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">
-            Explore the Marine World
+            Explora el Mundo Marino
           </h2>
           <p className="mt-2 text-lg text-muted-foreground">
-            Discover more about our oceans and how you can contribute.
+            Descubre más sobre nuestros océanos y cómo puedes contribuir.
           </p>
         </header>
         <div className="grid gap-8 md:grid-cols-2">
@@ -141,7 +141,7 @@ export default function MTMPage() {
               </CardContent>
               <CardFooter>
                 <Button asChild variant="outline" className="w-full sm:w-auto">
-                  <Link href={section.href}>Learn More</Link>
+                  <Link href={section.href}>Saber Más</Link>
                 </Button>
               </CardFooter>
             </Card>

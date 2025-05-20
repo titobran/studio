@@ -31,24 +31,24 @@ export default function LoginPage() {
     <div className="flex items-center justify-center py-12">
       <Card className="w-full max-w-md shadow-xl">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold">Welcome Back!</CardTitle>
-          <CardDescription>Log in to your MTM account.</CardDescription>
+          <CardTitle className="text-2xl font-bold">¡Bienvenido de Nuevo!</CardTitle>
+          <CardDescription>Inicia sesión en tu cuenta de MTM.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <form onSubmit={handleLogin} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">Correo Electrónico</Label>
               <Input 
                 id="email" 
                 type="email" 
-                placeholder="you@example.com" 
+                placeholder="tu@ejemplo.com" 
                 required 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">Contraseña</Label>
               <Input 
                 id="password" 
                 type="password" 
@@ -64,11 +64,11 @@ export default function LoginPage() {
                 <Label htmlFor="remember-me">Remember me</Label>
               </div> commented out, Checkbox not imported and not requested*/}
               <Link href="#" className="font-medium text-primary hover:underline">
-                Forgot password?
+                ¿Olvidaste tu contraseña?
               </Link>
             </div>
             <Button type="submit" className="w-full">
-              Log In
+              Iniciar Sesión
             </Button>
           </form>
           
@@ -78,34 +78,34 @@ export default function LoginPage() {
             </div>
             <div className="relative flex justify-center text-xs uppercase">
               <span className="bg-background px-2 text-muted-foreground">
-                Or log in with
+                O inicia sesión con
               </span>
             </div>
           </div>
 
           <div className="grid grid-cols-1 gap-3">
             <Button variant="outline" onClick={() => handleSocialLogin('Google')}>
-              <Chrome className="mr-2 h-4 w-4" /> Log in with Google
+              <Chrome className="mr-2 h-4 w-4" /> Iniciar sesión con Google
             </Button>
             <Button variant="outline" onClick={() => handleSocialLogin('Facebook')}>
-              <Facebook className="mr-2 h-4 w-4" /> Log in with Facebook
+              <Facebook className="mr-2 h-4 w-4" /> Iniciar sesión con Facebook
             </Button>
             <Button variant="outline" onClick={() => handleSocialLogin('Twitter')}>
-              <Twitter className="mr-2 h-4 w-4" /> Log in with Twitter (X)
+              <Twitter className="mr-2 h-4 w-4" /> Iniciar sesión con Twitter (X)
             </Button>
             <Button variant="outline" onClick={() => handleSocialLogin('Microsoft')}>
-              <AppWindow className="mr-2 h-4 w-4" /> Log in with Microsoft
+              <AppWindow className="mr-2 h-4 w-4" /> Iniciar sesión con Microsoft
             </Button>
             <Button variant="outline" onClick={() => handleSocialLogin('Yahoo')}>
-              <Mail className="mr-2 h-4 w-4" /> Log in with Yahoo
+              <Mail className="mr-2 h-4 w-4" /> Iniciar sesión con Yahoo
             </Button>
           </div>
         </CardContent>
         <CardFooter className="text-center text-sm">
           <p className="w-full">
-            Don't have an account?{' '}
+            ¿No tienes una cuenta?{' '}
             <Link href="/register" className="font-medium text-primary hover:underline">
-              Sign Up
+              Regístrate
             </Link>
           </p>
         </CardFooter>

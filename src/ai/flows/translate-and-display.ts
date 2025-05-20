@@ -1,25 +1,26 @@
+
 // This file is machine-generated - edit with care!
 
 'use server';
 
 /**
- * @fileOverview A translation AI agent.
+ * @fileOverview Un agente de IA para traducción.
  *
- * - translateAndDisplay - A function that handles the translation process.
- * - TranslateAndDisplayInput - The input type for the translateAndDisplay function.
- * - TranslateAndDisplayOutput - The return type for the translateAndDisplay function.
+ * - translateAndDisplay - Una función que maneja el proceso de traducción.
+ * - TranslateAndDisplayInput - El tipo de entrada para la función translateAndDisplay.
+ * - TranslateAndDisplayOutput - El tipo de retorno para la función translateAndDisplay.
  */
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const TranslateAndDisplayInputSchema = z.object({
-  phrase: z.string().describe('The phrase to translate.'),
+  phrase: z.string().describe('La frase a traducir.'),
 });
 export type TranslateAndDisplayInput = z.infer<typeof TranslateAndDisplayInputSchema>;
 
 const TranslateAndDisplayOutputSchema = z.object({
-  englishTranslation: z.string().describe('The translated phrase in English.'),
+  englishTranslation: z.string().describe('La frase traducida al inglés.'),
 });
 export type TranslateAndDisplayOutput = z.infer<typeof TranslateAndDisplayOutputSchema>;
 
