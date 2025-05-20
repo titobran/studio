@@ -92,12 +92,13 @@ export default function PremiumPage() {
       </header>
 
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {plans.map((plan) => (
+        {plans.map((plan, index) => (
           <Card
             key={plan.id}
-            className={`flex flex-col rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl ${
+            className={`flex flex-col rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl animate-in fade-in slide-in-from-bottom-5 duration-500 ease-out ${
               plan.highlight ? "border-2 border-accent ring-2 ring-accent/50" : "border-border"
             }`}
+            style={{ animationDelay: `${index * 100}ms` }}
           >
             <CardHeader className="p-6">
               <div className="flex items-center justify-between mb-2">

@@ -78,10 +78,11 @@ export default function SpeciesPage() {
       </header>
 
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {marineAnimals.map((animal) => (
+        {marineAnimals.map((animal, index) => (
           <Card
             key={animal.id}
-            className="flex flex-col rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl overflow-hidden"
+            className="flex flex-col rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-500 ease-out"
+            style={{ animationDelay: `${index * 100}ms` }}
           >
             <div className="w-full h-48 overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}

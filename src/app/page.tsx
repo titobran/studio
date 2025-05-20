@@ -119,8 +119,12 @@ export default function MTMPage() {
           </p>
         </header>
         <div className="grid gap-8 md:grid-cols-2">
-          {contentSections.map((section) => (
-            <Card key={section.id} className="shadow-lg rounded-xl overflow-hidden flex flex-col">
+          {contentSections.map((section, index) => (
+            <Card 
+              key={section.id} 
+              className="shadow-lg rounded-xl overflow-hidden flex flex-col animate-in fade-in slide-in-from-bottom-5 duration-500 ease-out"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
               {section.imgPlaceholder && (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img 
@@ -151,4 +155,3 @@ export default function MTMPage() {
     </div>
   );
 }
-
