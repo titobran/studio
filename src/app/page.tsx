@@ -95,7 +95,7 @@ export default function MTMPage() {
     <div className="min-h-screen flex flex-col bg-background selection:bg-primary/20 selection:text-primary">
       <nav className="w-full border-b border-border shadow-sm sticky top-0 bg-background z-50">
         <div className="container mx-auto flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
-          <span className="text-sm text-muted-foreground">Your App Motto</span>
+          <span className="text-sm text-muted-foreground">Your Gateway to the Digital Ocean</span>
           <div className="flex items-center space-x-3">
             <Button variant="ghost" size="sm">
               Register
