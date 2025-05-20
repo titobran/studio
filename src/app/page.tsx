@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, FormEvent } from 'react';
@@ -10,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { Globe, ThumbsUp, ThumbsDown, Loader2 } from 'lucide-react';
+import { Fish, ThumbsUp, ThumbsDown, Loader2 } from 'lucide-react'; // Changed Globe to Fish
 
 export default function MTMPage() {
   const [phrase, setPhrase] = useState<string>('');
@@ -95,7 +96,7 @@ export default function MTMPage() {
       <div className="w-full max-w-2xl space-y-8">
         <header className="text-center">
           <div className="inline-flex items-center gap-3 mb-4 text-primary">
-            <Globe className="h-10 w-10 sm:h-12 sm:w-12" />
+            <Fish className="h-10 w-10 sm:h-12 sm:w-12" /> {/* Changed Globe to Fish */}
             <h1 className="text-4xl sm:text-5xl font-bold">MTM</h1>
           </div>
           <p className="text-muted-foreground text-md sm:text-lg">
