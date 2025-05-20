@@ -11,12 +11,11 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { Fish, ThumbsUp, ThumbsDown, Loader2 } from 'lucide-react'; // Changed Globe to Fish
-// Optional icons for nav: import { UserPlus, LogIn as LogInIcon, Award, Star } from 'lucide-react';
+import { Fish, ThumbsUp, ThumbsDown, Loader2 } from 'lucide-react';
 
 export default function MTMPage() {
   const [phrase, setPhrase] = useState<string>('');
-  const [originalPhrase, setOriginalPhrase] = useState<string>(''); // To store the phrase that was translated
+  const [originalPhrase, setOriginalPhrase] = useState<string>('');
   const [translation, setTranslation] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -40,8 +39,8 @@ export default function MTMPage() {
     setIsLoading(true);
     setError(null);
     setTranslation('');
-    setFeedbackState(null); // Reset feedback for new translation
-    setOriginalPhrase(phrase); // Store the phrase being translated
+    setFeedbackState(null); 
+    setOriginalPhrase(phrase); 
 
     try {
       const input: TranslateAndDisplayInput = { phrase };
@@ -95,23 +94,22 @@ export default function MTMPage() {
   return (
     <div className="min-h-screen flex flex-col bg-background selection:bg-primary/20 selection:text-primary">
       <nav className="w-full border-b border-border shadow-sm sticky top-0 bg-background z-50">
-        <div className="container mx-auto flex items-center justify-end h-16 px-4 sm:px-6 lg:px-8 space-x-3">
-          <Button variant="ghost" size="sm">
-            {/* <UserPlus className="mr-2 h-4 w-4" /> */}
-            Register
-          </Button>
-          <Button variant="outline" size="sm">
-            {/* <LogInIcon className="mr-2 h-4 w-4" /> */}
-            Log In
-          </Button>
-          <Button variant="ghost" size="sm">
-            {/* <Award className="mr-2 h-4 w-4" /> */}
-            Credits
-          </Button>
-          <Button variant="default" size="sm" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-            {/* <Star className="mr-2 h-4 w-4" /> */}
-            Premium
-          </Button>
+        <div className="container mx-auto flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
+          <span className="text-sm text-muted-foreground">Your App Motto</span>
+          <div className="flex items-center space-x-3">
+            <Button variant="ghost" size="sm">
+              Register
+            </Button>
+            <Button variant="outline" size="sm">
+              Log In
+            </Button>
+            <Button variant="ghost" size="sm">
+              Credits
+            </Button>
+            <Button variant="default" size="sm" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+              Premium
+            </Button>
+          </div>
         </div>
       </nav>
 
