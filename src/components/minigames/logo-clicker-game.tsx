@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 
 const GAME_DURATION_SECONDS = 15;
-const LOGO_MOVE_INTERVAL_MS = 1000;
+const LOGO_MOVE_INTERVAL_MS = 600; // Changed from 1000 to 600
 const GAME_AREA_WIDTH = 380; // Adjusted for dialog padding
 const GAME_AREA_HEIGHT = 250;
 const LOGO_SIZE = 40; // Approximate size of the icon for collision detection
