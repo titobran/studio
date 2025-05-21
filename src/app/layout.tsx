@@ -47,7 +47,7 @@ export default function RootLayout({
                 layout="fill"
                 objectFit="cover"
                 className="opacity-30" // Adjust opacity for desired subtlety
-                data-ai-hint="ocean waves" // General ocean hint
+                data-ai-hint="octopus starfish" // Updated hint
                 priority 
               />
             </div>
