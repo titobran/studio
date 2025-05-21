@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Turtle, UserCircle, LogOut, Settings, HelpCircle, Megaphone } from 'lucide-react'; // Replaced Announce with Megaphone
+import { Turtle, UserCircle, LogOut, Settings, HelpCircle, Megaphone, Gamepad2 } from 'lucide-react';
 import { ThemeToggleButton } from '@/components/ui/theme-toggle-button';
 import {
   DropdownMenu,
@@ -13,21 +13,56 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog";
+import { useState } from 'react';
+import LogoClickerGame from '@/components/minigames/logo-clicker-game'; // Import the new game component
 
 export default function Navbar() {
   const goldButtonClassName = "bg-custom-gold-button-bg text-custom-gold-button-text hover:brightness-[0.95]";
+  const [isGameDialogOpen, setIsGameDialogOpen] = useState(false);
 
   return (
     <nav className="w-full border-b border-border shadow-sm sticky top-0 bg-background z-50">
       <div className="container mx-auto flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center space-x-2">
-          <Turtle className="h-5 w-5 text-primary" />
-          <Link href="/" className="font-semibold text-primary">
-            MTM
-          </Link>
-          <span className="text-sm text-muted-foreground hidden md:block">Tu Portal al Océano Digital</span>
-        </div>
-        <div className="flex items-center space-x-1 sm:space-x-2"> {/* Reduced space-x for tighter packing */}
+        <Dialog open={isGameDialogOpen} onOpenChange={setIsGameDialogOpen}>
+          <DialogTrigger asChild>
+            <button className="flex items-center space-x-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md p-1">
+              <Turtle className="h-5 w-5 text-primary" />
+              <span className="font-semibold text-primary">MTM</span>
+              <span className="text-sm text-muted-foreground hidden md:block">Tu Portal al Océano Digital</span>
+            </button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[450px]">
+            <DialogHeader>
+              <DialogTitle className="flex items-center">
+                <Gamepad2 className="mr-2 h-5 w-5" />
+                MiniJuego: ¡Atrapa la Tortuga!
+              </DialogTitle>
+              <DialogDescription>
+                Haz clic en la tortuga tantas veces como puedas antes de que se acabe el tiempo.
+              </DialogDescription>
+            </DialogHeader>
+            <LogoClickerGame />
+            <DialogFooter className="sm:justify-start">
+              <DialogClose asChild>
+                <Button type="button" variant="secondary">
+                  Cerrar
+                </Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+        
+        <div className="flex items-center space-x-1 sm:space-x-2">
           <ThemeToggleButton />
           <Button size="sm" asChild className={goldButtonClassName}>
             <span><Link href="/register">Regístrate</Link></span>
@@ -66,13 +101,12 @@ export default function Navbar() {
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link href="/whats-new" className="flex items-center">
-                  <Megaphone className="mr-2 h-4 w-4" /> {/* Using Megaphone for Novedades */}
+                  <Megaphone className="mr-2 h-4 w-4" />
                   <span>Novedades</span>
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
-                {/* In a real app, this would trigger a logout function */}
                 <Link href="/logout" className="flex items-center text-destructive hover:!text-destructive">
                   <LogOut className="mr-2 h-4 w-4" />
                   <span>Cerrar Sesión</span>
@@ -80,7 +114,6 @@ export default function Navbar() {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-
         </div>
       </div>
     </nav>
