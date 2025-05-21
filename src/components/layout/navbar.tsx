@@ -22,7 +22,7 @@ import {
   DialogTitle,
   DialogFooter,
   DialogClose,
-  DialogTrigger, // Added DialogTrigger here
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import { useState } from 'react';
 import LogoClickerGame from '@/components/minigames/logo-clicker-game';
@@ -130,7 +130,7 @@ export default function Navbar() {
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
-                <Link href="/logout" className="flex items-center text-destructive hover:!text-destructive">
+                <Link href="/logout" className="flex items-center"> {/* Removed text-destructive classes */}
                   <LogOut className="mr-2 h-4 w-4" />
                   <span>Cerrar Sesión</span>
                 </Link>
