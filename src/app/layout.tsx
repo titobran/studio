@@ -42,12 +42,12 @@ export default function RootLayout({
             {/* Background Image Layer - Fixed to viewport, behind all content */}
             <div className="fixed inset-0 -z-10"> 
               <Image
-                src="https://placehold.co/1920x1080.png" 
+                src="https://lh3.googleusercontent.com/gg-dl/AJfQ9KSQkuMU9RbHO3SPDKNlJOEShpr93nLCO6aZsYSEFow7OLG2i5W5WudauCdAkwL2lQl07_66s3USr3LzSLXxJARiM3snec2hxoogFKxXBit_58JRK26atdCEGPkcoQno5d1CTm3tgdkPJeD5P-DPfTsysZiA5Fp6KhiJOqsq5qhUWj4Q5A" 
                 alt="Fondo marino"
                 layout="fill"
                 objectFit="cover"
                 className="opacity-30" // Adjust opacity for desired subtlety
-                data-ai-hint="octopus starfish" // Updated hint
+                data-ai-hint="octopus starfish" 
                 priority 
               />
             </div>
