@@ -20,9 +20,9 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
   DialogFooter,
   DialogClose,
+  DialogTrigger, // Added DialogTrigger here
 } from "@/components/ui/dialog";
 import { useState } from 'react';
 import LogoClickerGame from '@/components/minigames/logo-clicker-game';
@@ -48,7 +48,7 @@ export default function Navbar() {
         {isHomePage ? (
           <Dialog open={isGameDialogOpen} onOpenChange={setIsGameDialogOpen}>
             <DialogTrigger asChild>
-              <button 
+              <button
                 className="flex items-center space-x-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md p-1"
                 aria-label="Abrir minijuego de MTM"
               >
@@ -76,17 +76,17 @@ export default function Navbar() {
             </DialogContent>
           </Dialog>
         ) : (
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="flex items-center space-x-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md p-1"
             aria-label="Ir a la página principal de MTM"
           >
             {MtmLogoAndText}
           </Link>
         )}
-        
+
         <div className="flex items-center space-x-1 sm:space-x-2">
-          <ThemeToggleButton />
+          <ThemeToggleButton className={`${goldButtonClassName} rounded-full`} />
           <Button size="sm" asChild className={goldButtonClassName}>
             <span><Link href="/register">Regístrate</Link></span>
           </Button>
