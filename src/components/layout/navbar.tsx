@@ -102,7 +102,7 @@ export default function Navbar() {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="rounded-full">
+              <Button size="icon" className={`${goldButtonClassName} rounded-full`}>
                 <UserCircle className="h-6 w-6" />
                 <span className="sr-only">Abrir menú de usuario</span>
               </Button>
