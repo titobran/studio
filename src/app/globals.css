@@ -4,33 +4,39 @@
 
 @layer base {
   :root {
-    --background: 208 100% 97%; /* Light grayish-blue #F0F8FF */
-    --foreground: 0 0% 3.9%;    /* Nearly Black #0A0A0A */
+    --background: 208 100% 97%; /* Light grayish-blue #F0F8FF (No change) */
+    --foreground: 0 0% 3.9%;    /* Nearly Black #0A0A0A (No change) */
 
-    --card: 0 0% 100%;           /* White #FFFFFF */
-    --card-foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;           /* White #FFFFFF (No change) */
+    --card-foreground: 0 0% 3.9%; /* (No change) */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%; /* (No change) */
+    --popover-foreground: 0 0% 3.9%; /* (No change) */
 
-    --primary: 172 56% 39%;        /* Deep Teal #2A9D8F */
-    --primary-foreground: 0 0% 98%; /* Nearly White #FAFAFA */
+    /* --- PRIMARY COLOR UPDATED --- */
+    /* Was Deep Teal, now a Bluer Teal */
+    --primary: 185 56% 39%;        /* Bluer Teal (e.g., a hue like 185 instead of 172) */
+    --primary-foreground: 0 0% 98%; /* Nearly White #FAFAFA (Should still work) */
 
-    --secondary: 0 0% 96.1%;     /* Default Light Gray */
-    --secondary-foreground: 0 0% 9%; /* Default Dark Gray */
+    --secondary: 0 0% 96.1%;     /* Default Light Gray (No change) */
+    --secondary-foreground: 0 0% 9%; /* Default Dark Gray (No change) */
 
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
+    --muted: 0 0% 96.1%; /* (No change) */
+    --muted-foreground: 0 0% 45.1%; /* (No change) */
 
-    --accent: 13 79% 61%;         /* Warm Orange #E76F51 */
-    --accent-foreground: 0 0% 3.9%; /* Nearly Black for text on orange */
+    /* --- ACCENT COLOR UPDATED --- */
+    /* Was Warm Orange, now the original Deep Teal */
+    --accent: 172 56% 39%;         /* Deep Teal (was original primary) */
+    --accent-foreground: 0 0% 98%; /* Nearly White (for text on new Deep Teal accent) */
 
-    --destructive: 0 84.2% 60.2%;  /* Default Red */
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 84.2% 60.2%;  /* Default Red (No change) */
+    --destructive-foreground: 0 0% 98%; /* (No change) */
 
-    --border: 0 0% 89.8%;        /* Default Light Gray Border */
-    --input: 0 0% 89.8%;
-    --ring: 172 56% 39%;          /* Primary Teal for focus rings */
+    --border: 0 0% 89.8%;        /* Default Light Gray Border (No change) */
+    --input: 0 0% 89.8%; /* (No change) */
+    
+    /* --- RING COLOR UPDATED --- */
+    --ring: 185 56% 39%;          /* New Bluer Teal for focus rings */
 
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
@@ -39,49 +45,55 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
 
-    /* Sidebar variables adjusted to new theme, though not primary focus */
-    --sidebar-background: 0 0% 98%; /* Similar to card or slightly off-main */
+    /* Sidebar variables adjusted to new theme */
+    --sidebar-background: 0 0% 98%; 
     --sidebar-foreground: 0 0% 20%;
-    --sidebar-primary: 172 56% 39%; 
+    --sidebar-primary: 185 56% 39%; /* New Bluer Teal */
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 13 79% 61%;
-    --sidebar-accent-foreground: 0 0% 3.9%;
+    --sidebar-accent: 172 56% 39%;  /* New Deep Teal accent */
+    --sidebar-accent-foreground: 0 0% 98%;
     --sidebar-border: 0 0% 89.8%;
-    --sidebar-ring: 172 56% 39%;
+    --sidebar-ring: 185 56% 39%;
 
-    /* Custom Gold Colors */
-    --custom-gold-button-bg: 40 90% 50%; /* Gold like #F2C60D */
-    --custom-gold-button-text: 0 0% 10%;   /* Dark text for on-gold buttons */
+    /* Custom Gold Colors (No change requested, remains as is) */
+    --custom-gold-button-bg: 40 90% 50%; 
+    --custom-gold-button-text: 0 0% 10%;  
   }
 
   .dark {
-    --background: 210 15% 10%;    /* Dark Desaturated Blue */
-    --foreground: 0 0% 95%;       /* Light Gray */
+    --background: 210 15% 10%;    /* Dark Desaturated Blue (No change) */
+    --foreground: 0 0% 95%;       /* Light Gray (No change) */
 
-    --card: 210 15% 12%;          /* Slightly lighter than dark bg */
-    --card-foreground: 0 0% 95%;
+    --card: 210 15% 12%;          /* Slightly lighter than dark bg (No change) */
+    --card-foreground: 0 0% 95%; /* (No change) */
 
-    --popover: 210 15% 10%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 210 15% 10%; /* (No change) */
+    --popover-foreground: 0 0% 95%; /* (No change) */
 
-    --primary: 172 56% 45%;        /* Brighter Teal for dark mode */
-    --primary-foreground: 0 0% 5%;  /* Dark text for brighter teal */
+    /* --- DARK PRIMARY COLOR UPDATED --- */
+    /* Was Brighter Teal, now a Brighter Bluer Teal */
+    --primary: 185 56% 45%;        /* Brighter Bluer Teal */
+    --primary-foreground: 0 0% 5%;  /* Dark text for brighter teal (Should still work) */
 
-    --secondary: 0 0% 14.9%;      /* Default Dark Secondary */
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 0 0% 14.9%;      /* Default Dark Secondary (No change) */
+    --secondary-foreground: 0 0% 98%; /* (No change) */
 
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
+    --muted: 0 0% 14.9%; /* (No change) */
+    --muted-foreground: 0 0% 63.9%; /* (No change) */
 
-    --accent: 13 79% 65%;          /* Brighter Orange for dark mode */
-    --accent-foreground: 0 0% 5%;   /* Dark text for brighter orange */
+    /* --- DARK ACCENT COLOR UPDATED --- */
+    /* Was Brighter Orange, now a Brighter Deep Teal */
+    --accent: 172 56% 50%;          /* Brighter Deep Teal (adjusted from old dark primary) */
+    --accent-foreground: 0 0% 5%;   /* Dark text for new dark accent */
 
-    --destructive: 0 70% 40%;      /* Adjusted Red for dark mode */
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 70% 40%;      /* Adjusted Red for dark mode (No change) */
+    --destructive-foreground: 0 0% 98%; /* (No change) */
 
-    --border: 210 10% 20%;        /* Darker Gray Border */
-    --input: 210 10% 20%;
-    --ring: 172 56% 45%;          /* Dark Primary Teal for focus rings */
+    --border: 210 10% 20%;        /* Darker Gray Border (No change) */
+    --input: 210 10% 20%; /* (No change) */
+
+    /* --- DARK RING COLOR UPDATED --- */
+    --ring: 185 56% 45%;          /* New Dark Bluer Teal for focus rings */
     
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
@@ -92,16 +104,16 @@
     /* Sidebar variables for dark theme */
     --sidebar-background: 210 15% 8%;
     --sidebar-foreground: 0 0% 80%;
-    --sidebar-primary: 172 56% 45%;
+    --sidebar-primary: 185 56% 45%; /* New Dark Bluer Teal */
     --sidebar-primary-foreground: 0 0% 5%;
-    --sidebar-accent: 13 79% 65%;
+    --sidebar-accent: 172 56% 50%;  /* New Dark Brighter Deep Teal accent */
     --sidebar-accent-foreground: 0 0% 5%;
     --sidebar-border: 210 10% 15%;
-    --sidebar-ring: 172 56% 45%;
+    --sidebar-ring: 185 56% 45%;
 
-    /* Custom Gold Colors for Dark Mode */
-    --custom-gold-button-bg: 40 90% 55%; /* Slightly brighter gold for dark mode */
-    --custom-gold-button-text: 0 0% 10%;   /* Dark text for on-gold buttons */
+    /* Custom Gold Colors for Dark Mode (No change requested, remains as is) */
+    --custom-gold-button-bg: 40 90% 55%; 
+    --custom-gold-button-text: 0 0% 10%;   
   }
 }
 
