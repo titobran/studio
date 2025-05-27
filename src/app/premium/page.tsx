@@ -75,7 +75,7 @@ const plans: Plan[] = [
       { text: "Acceso anticipado a nuevas funciones (beta)", available: true },
     ],
     cta: "Elegir Oro",
-    icon: <Crown className="h-6 w-6 text-yellow-500" />,
+    icon: <Crown className="h-6 w-6 text-accent" />, // Changed from text-yellow-500
   },
 ];
 
@@ -119,10 +119,10 @@ export default function PremiumPage() {
                   <li key={index} className="flex items-center">
                     <CheckCircle
                       className={`h-5 w-5 mr-2 shrink-0 ${
-                        feature.available ? "text-green-500" : "text-muted-foreground/50"
+                        feature.available ? "text-primary" : "text-muted-foreground/50" // Changed from text-green-500 to text-primary for available
                       }`}
                     />
-                    <span className={!feature.available ? "text-muted-foreground line-through" : ""}>
+                    <span className={`${!feature.available ? "text-muted-foreground line-through" : "text-foreground"}`}> {/* Ensure available text uses foreground */}
                       {feature.text}
                     </span>
                   </li>

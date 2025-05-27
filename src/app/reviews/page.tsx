@@ -33,7 +33,7 @@ const StarRatingDisplay: React.FC<{ rating: number; className?: string }> = ({ r
       <Star
         key={i}
         className={`h-5 w-5 ${className} ${
-          i < rating ? 'text-yellow-400 fill-yellow-400' : 'text-muted-foreground/30'
+          i < rating ? 'text-accent fill-accent' : 'text-muted-foreground/30' // Changed from text-yellow-400
         }`}
       />
     );
@@ -48,8 +48,8 @@ const StarRatingInput: React.FC<StarRatingInputProps> = ({ rating, setRating, di
         <Star
           key={star}
           className={`h-7 w-7 transition-colors ${
-            disabled ? 'text-muted-foreground/30 cursor-not-allowed' : 'cursor-pointer hover:text-yellow-500'
-          } ${star <= rating ? 'text-yellow-400 fill-yellow-400' : 'text-muted-foreground/30'}`}
+            disabled ? 'text-muted-foreground/30 cursor-not-allowed' : 'cursor-pointer hover:text-accent/80' // Adjusted hover
+          } ${star <= rating ? 'text-accent fill-accent' : 'text-muted-foreground/30'}`} // Changed from text-yellow-400
           onClick={() => !disabled && setRating(star)}
           aria-label={`Calificar ${star} estrellas`}
         />
@@ -114,7 +114,7 @@ export default function ReviewsPage() {
         </CardHeader>
         <CardContent className="p-6 space-y-6">
           {showSuccessMessage && (
-            <div className="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg" role="alert">
+            <div className="p-4 mb-4 text-sm text-primary bg-primary/10 rounded-lg" role="alert"> {/* Changed from green to primary based theme */}
               <span className="font-medium">¡Gracias!</span> Tu reseña ha sido enviada (simulado).
             </div>
           )}
@@ -197,4 +197,3 @@ export default function ReviewsPage() {
     </div>
   );
 }
-
