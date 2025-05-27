@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 // import { Textarea } from '@/components/ui/textarea'; // Removed as no longer used
 // import { useToast } from '@/hooks/use-toast'; // Removed as no longer used
-import { Turtle, Newspaper, ShoppingBag, FlaskConical } from 'lucide-react'; // Changed Fish to Turtle, removed ThumbsUp, ThumbsDown, Loader2
+import { Turtle, Newspaper, ShoppingBag, FlaskConical, Star } from 'lucide-react'; // Changed Fish to Turtle, removed ThumbsUp, ThumbsDown, Loader2. Added Star for reviews.
 
 interface ContentSection {
   id: string;
@@ -61,6 +61,15 @@ const contentSections: ContentSection[] = [
     href: '/research',
     imgPlaceholder: 'https://placehold.co/600x400.png',
     dataAiHint: 'science laboratory',
+  },
+  {
+    id: 'reviews',
+    title: 'Opiniones y Reseñas',
+    description: 'Mira lo que otros dicen sobre su experiencia en MTM y cómo hemos impactado su conexión con el océano.',
+    icon: Star, // Using Star icon for reviews
+    href: '/reviews',
+    imgPlaceholder: 'https://placehold.co/600x400.png',
+    dataAiHint: 'community feedback',
   },
 ];
 
@@ -155,3 +164,4 @@ export default function MTMPage() {
     </div>
   );
 }
+
