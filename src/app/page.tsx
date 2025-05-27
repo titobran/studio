@@ -1,13 +1,11 @@
 
 "use client";
 
-import { useState, useEffect } from 'react'; // useEffect might not be needed anymore if no async ops on mount
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Turtle, Newspaper, ShoppingBag, FlaskConical, Star, Quote } from 'lucide-react'; 
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Turtle, Newspaper, ShoppingBag, FlaskConical, Quote, MessageSquarePlus } from 'lucide-react'; 
 
 interface ContentSection {
   id: string;
@@ -56,62 +54,7 @@ const contentSections: ContentSection[] = [
     imgPlaceholder: 'https://placehold.co/600x400.png',
     dataAiHint: 'science laboratory',
   },
-  // Removed "reviews" from here, it will be an inline section
 ];
-
-interface FeaturedReview {
-  id: string;
-  userName: string;
-  userAvatarUrl: string;
-  dataAiHintAvatar: string;
-  rating: number;
-  reviewText: string;
-  reviewDate: string; // Kept for potential future use, though not displayed in compact view
-}
-
-const featuredReviews: FeaturedReview[] = [
-  {
-    id: 'review1',
-    userName: 'Explorador@ Marín@',
-    userAvatarUrl: 'https://placehold.co/100x100.png',
-    dataAiHintAvatar: 'diver avatar',
-    rating: 5,
-    reviewText: '¡MTM es increíble! He aprendido muchísimo sobre la vida marina y los esfuerzos de conservación. La sección de noticias siempre está actualizada.',
-    reviewDate: '15 de Abril, 2025',
-  },
-  {
-    id: 'review3',
-    userName: 'Amante del Océano',
-    userAvatarUrl: 'https://placehold.co/100x100.png',
-    dataAiHintAvatar: 'ocean lover',
-    rating: 5,
-    reviewText: 'Me encantan los productos sostenibles que se muestran. ¡Ya he comprado varios! Es genial encontrar un lugar que promueva la conciencia oceánica de esta manera.',
-    reviewDate: '10 de Mayo, 2025',
-  },
-   {
-    id: 'review2',
-    userName: 'Científic@ Curios@',
-    userAvatarUrl: 'https://placehold.co/100x100.png',
-    dataAiHintAvatar: 'scientist avatar',
-    rating: 4,
-    reviewText: 'Una plataforma muy completa y bien diseñada. Los artículos de investigación son fascinantes y fáciles de entender. Me gustaría ver más interactividad.',
-    reviewDate: '22 de Marzo, 2025',
-  },
-];
-
-const renderStars = (rating: number) => {
-  const stars = [];
-  for (let i = 0; i < 5; i++) {
-    stars.push(
-      <Star
-        key={i}
-        className={`h-4 w-4 ${i < rating ? 'text-yellow-400 fill-yellow-400' : 'text-muted-foreground/30'}`}
-      />
-    );
-  }
-  return <div className="flex items-center">{stars}</div>;
-};
-
 
 export default function MTMPage() {
   return (
@@ -173,45 +116,24 @@ export default function MTMPage() {
         </div>
       </div>
 
-      {/* Featured Reviews Section */}
+      {/* User Reviews Call to Action Section */}
       <div className="w-full max-w-5xl mt-16 mb-12 space-y-8">
         <header className="text-center">
           <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl flex items-center justify-center">
             <Quote className="h-8 w-8 mr-3 transform -scale-x-100" />
-            Lo que dicen nuestros usuarios
+            ¡Valora Tu Experiencia!
             <Quote className="h-8 w-8 ml-3" />
           </h2>
           <p className="mt-2 text-lg text-muted-foreground">
-            Opiniones de nuestra comunidad sobre MTM.
+            Nos encantaría conocer tu opinión. Ayúdanos a mejorar MTM.
           </p>
         </header>
-        <div className="grid gap-8 md:grid-cols-1 lg:grid-cols-3">
-          {featuredReviews.map((review, index) => (
-            <Card 
-              key={review.id} 
-              className="shadow-lg rounded-xl overflow-hidden flex flex-col animate-in fade-in slide-in-from-bottom-5 duration-500 ease-out"
-              style={{ animationDelay: `${(contentSections.length + index) * 100}ms` }}
-            >
-              <CardHeader className="flex flex-row items-center gap-4 p-4">
-                <Avatar className="h-12 w-12">
-                  <AvatarImage src={review.userAvatarUrl} alt={review.userName} data-ai-hint={review.dataAiHintAvatar} />
-                  <AvatarFallback>{review.userName.substring(0, 2)}</AvatarFallback>
-                </Avatar>
-                <div>
-                  <CardTitle className="text-md font-semibold">{review.userName}</CardTitle>
-                  {renderStars(review.rating)}
-                </div>
-              </CardHeader>
-              <CardContent className="p-4 pt-0 text-sm text-muted-foreground flex-grow">
-                <p className="italic line-clamp-4">&quot;{review.reviewText}&quot;</p>
-              </CardContent>
-              {/* Footer could be added if needed, e.g. review.reviewDate */}
-            </Card>
-          ))}
-        </div>
         <div className="text-center mt-8">
-          <Button asChild variant="outline" size="lg">
-            <Link href="/reviews">Ver todas las opiniones</Link>
+          <Button asChild variant="default" size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+            <Link href="/reviews" className="flex items-center">
+              <MessageSquarePlus className="mr-2 h-5 w-5" />
+              Escribe o Lee Reseñas
+            </Link>
           </Button>
         </div>
       </div>
