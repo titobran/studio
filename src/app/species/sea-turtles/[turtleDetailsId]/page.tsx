@@ -35,6 +35,7 @@ const averageWeightData = [
   { name: "T. Carey", weight: 60 },
   { name: "T. Caguama", weight: 135 },
   { name: "T. Lora", weight: 45 },
+  { name: "T. Golfina", weight: 45 }, // Añadida Tortuga Golfina
 ];
 
 const chartConfigSizeVsAge: ChartConfig = {
@@ -118,7 +119,7 @@ export default function TurtleDetailsPage() {
               <CardTitle className="text-xl flex items-center">
                 <ScatterChartIcon className="mr-2 h-5 w-5 text-primary" />Crecimiento: Tamaño vs Edad
               </CardTitle>
-              <CardDescription>Relación entre la edad (años) y la longitud del caparazón (cm).</CardDescription>
+              <CardDescription>Relación entre la edad (años) y la longitud del caparazón (cm) para {turtleInfo.name}.</CardDescription>
             </CardHeader>
             <CardContent>
               <ChartContainer config={chartConfigSizeVsAge} className="h-[350px] w-full">
@@ -194,3 +195,5 @@ export default function TurtleDetailsPage() {
   );
 }
 
+
+    
