@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { ArrowLeft, Image as ImageIcon, BarChart2, ScatterChart as ScatterChartIcon, HelpCircle } from 'lucide-react';
 import { ChartContainer, ChartTooltipContent, ChartLegend } from "@/components/ui/chart";
 import type { ChartConfig } from "@/components/ui/chart";
-import { BarChart, Bar, ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend as RechartsLegend, ResponsiveContainer, LabelList } from 'recharts';
+import { BarChart, Bar, ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend as RechartsLegend, ResponsiveContainer, LabelList, Cell } from 'recharts';
 
 // Datos de ejemplo para las especies de tortugas (para obtener el nombre)
 const seaTurtleSpeciesData = [
@@ -30,20 +30,23 @@ const sizeVsAgeData = [
 ];
 
 const averageWeightData = [
-  { name: "T. Verde", weight: 150 },
-  { name: "T. Laúd", weight: 400 },
-  { name: "T. Carey", weight: 60 },
-  { name: "T. Caguama", weight: 135 },
-  { name: "T. Lora", weight: 45 },
-  { name: "T. Golfina", weight: 45 },
+  { id: 'green', name: "T. Verde", weight: 150 },
+  { id: 'leatherback', name: "T. Laúd", weight: 400 },
+  { id: 'hawksbill', name: "T. Carey", weight: 60 },
+  { id: 'loggerhead', name: "T. Caguama", weight: 135 },
+  { id: 'kemps-ridley', name: "T. Lora", weight: 45 },
+  { id: 'olive-ridley', name: "T. Golfina", weight: 45 },
 ];
 
 const chartConfigSizeVsAge: ChartConfig = {
   length: { label: "Longitud (cm)", color: "hsl(var(--primary))" },
 };
 
+// Config para el gráfico de peso promedio. El color general es accent, pero se anulará por celda.
 const chartConfigAvgWeight: ChartConfig = {
   weight: { label: "Peso Promedio (kg)", color: "hsl(var(--accent))" },
+   // Podríamos añadir un color primario para la leyenda si quisiéramos diferenciarlo
+  currentWeight: { label: "Peso Promedio (kg) - Actual", color: "hsl(var(--primary))" },
 };
 
 
@@ -51,12 +54,9 @@ export default function TurtleDetailsPage() {
   const params = useParams();
   const turtleIdParam = params.turtleDetailsId;
   
-  // Asegurar que turtleId sea un string. Para rutas como [param], debería serlo.
-  // Para rutas catch-all [...param], podría ser un array.
   const turtleId = Array.isArray(turtleIdParam) ? turtleIdParam[0] : turtleIdParam;
 
   if (!turtleId || typeof turtleId !== 'string') {
-    // Esto maneja el caso donde turtleId no está presente o no es un string
     return (
       <div className="container mx-auto px-4 py-12 text-center">
         <h1 className="text-2xl font-bold text-destructive">Error</h1>
@@ -75,6 +75,15 @@ export default function TurtleDetailsPage() {
     name: turtleId.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
     scientificName: "N/A (Especie no documentada en nuestros datos)",
   };
+
+  // Modificamos los datos para el gráfico de peso promedio para la leyenda
+  const processedAverageWeightData = averageWeightData.map(item => ({
+    ...item,
+    // Usamos diferentes dataKeys para la leyenda si es necesario
+    // Esto es más para control de leyenda si se requiere mostrar "Actual" vs "Otros"
+    // Para el color de la barra, Cell es suficiente.
+  }));
+
 
   return (
     <div className="container mx-auto px-4 py-12 space-y-12">
@@ -161,14 +170,14 @@ export default function TurtleDetailsPage() {
           <Card>
             <CardHeader>
               <CardTitle className="text-xl flex items-center">
-                <BarChart2 className="mr-2 h-5 w-5 text-accent" />Peso Promedio por Especie
+                <BarChart2 className="mr-2 h-5 w-5 text-primary" />Peso Promedio por Especie
               </CardTitle>
-              <CardDescription>Comparación del peso promedio (kg) entre diferentes especies de tortugas marinas.</CardDescription>
+              <CardDescription>Comparación del peso promedio (kg) entre diferentes especies de tortugas marinas. La especie actual ({turtleInfo.name}) está resaltada.</CardDescription>
             </CardHeader>
             <CardContent>
               <ChartContainer config={chartConfigAvgWeight} className="h-[350px] w-full">
                 <ResponsiveContainer>
-                  <BarChart data={averageWeightData} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                  <BarChart data={processedAverageWeightData} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
                     <CartesianGrid strokeDasharray="3 3" vertical={false} />
                     <XAxis dataKey="name" stroke="hsl(var(--muted-foreground))" />
                     <YAxis unit=" kg" stroke="hsl(var(--muted-foreground))" />
@@ -176,9 +185,18 @@ export default function TurtleDetailsPage() {
                       cursor={{ fill: 'hsl(var(--muted)/0.3)' }}
                       content={<ChartTooltipContent />} 
                     />
-                    <RechartsLegend content={<ChartLegend />} />
-                    <Bar dataKey="weight" fill="var(--color-weight)" radius={[4, 4, 0, 0]}>
+                    {/* La leyenda puede necesitar ajustes si queremos diferenciar explícitamente "actual" vs "otras" */}
+                    <RechartsLegend content={<ChartLegend />} /> 
+                    <Bar dataKey="weight" radius={[4, 4, 0, 0]}>
                        <LabelList dataKey="weight" position="top" offset={5} fontSize={10} formatter={(value: number) => `${value} kg`} />
+                       {
+                        averageWeightData.map((entry, index) => (
+                          <Cell 
+                            key={`cell-${index}`} 
+                            fill={entry.id === turtleId ? "hsl(var(--primary))" : "hsl(var(--accent))"} 
+                            />
+                        ))
+                       }
                     </Bar>
                   </BarChart>
                 </ResponsiveContainer>
@@ -210,3 +228,4 @@ export default function TurtleDetailsPage() {
     </div>
   );
 }
+
