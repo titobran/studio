@@ -35,7 +35,7 @@ const averageWeightData = [
   { id: 'hawksbill', name: "T. Carey", weight: 60 },
   { id: 'loggerhead', name: "T. Caguama", weight: 135 },
   { id: 'kemps-ridley', name: "T. Lora", weight: 45 },
-  { id: 'olive-ridley', name: "T. Golfina", weight: 45 }, // Añadida Tortuga Golfina
+  { id: 'olive-ridley', name: "T. Golfina", weight: 45 },
 ];
 
 const chartConfigSizeVsAge: ChartConfig = {
@@ -44,7 +44,7 @@ const chartConfigSizeVsAge: ChartConfig = {
 
 const chartConfigAvgWeight: ChartConfig = {
   weight: { label: "Peso Promedio (kg)", color: "hsl(var(--accent))" },
-  currentWeight: { label: "Peso Promedio (kg) - Actual", color: "hsl(var(--primary))" },
+  // currentWeight: { label: "Peso Promedio (kg) - Actual", color: "hsl(var(--primary))" }, // No se usa explícitamente para colorear
 };
 
 
@@ -144,7 +144,7 @@ export default function TurtleDetailsPage() {
             </CardHeader>
             <CardContent>
               <ChartContainer config={chartConfigSizeVsAge} className="h-[350px] w-full">
-                  <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                  <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }} data={sizeVsAgeData}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis type="number" dataKey="age" name="Edad (años)" unit=" años" stroke="hsl(var(--muted-foreground))" />
                     <YAxis type="number" dataKey="length" name="Longitud (cm)" unit=" cm" stroke="hsl(var(--muted-foreground))" />
@@ -153,7 +153,7 @@ export default function TurtleDetailsPage() {
                       content={<ChartTooltipContent indicator="dot" />}
                     />
                     <RechartsLegend content={<ChartLegend />} />
-                    <Scatter name="Longitud" data={sizeVsAgeData} fill="var(--color-length)" />
+                    <Scatter name="Longitud" dataKey="length" fill="var(--color-length)" />
                   </ScatterChart>
               </ChartContainer>
             </CardContent>
@@ -180,7 +180,7 @@ export default function TurtleDetailsPage() {
                     <Bar dataKey="weight" radius={[4, 4, 0, 0]}>
                        <LabelList dataKey="weight" position="top" offset={5} fontSize={10} formatter={(value: number) => `${value} kg`} />
                        {
-                        averageWeightData.map((entry, index) => (
+                        processedAverageWeightData.map((entry, index) => (
                           <Cell 
                             key={`cell-${index}`} 
                             fill={entry.id === turtleId ? "hsl(var(--primary))" : "hsl(var(--accent))"} 
@@ -218,3 +218,4 @@ export default function TurtleDetailsPage() {
   );
 }
 
+    
