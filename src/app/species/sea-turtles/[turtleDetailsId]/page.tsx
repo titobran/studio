@@ -35,7 +35,7 @@ const averageWeightData = [
   { name: "T. Carey", weight: 60 },
   { name: "T. Caguama", weight: 135 },
   { name: "T. Lora", weight: 45 },
-  { name: "T. Golfina", weight: 45 }, // Añadida Tortuga Golfina
+  { name: "T. Golfina", weight: 45 },
 ];
 
 const chartConfigSizeVsAge: ChartConfig = {
@@ -49,10 +49,32 @@ const chartConfigAvgWeight: ChartConfig = {
 
 export default function TurtleDetailsPage() {
   const params = useParams();
-  const turtleId = params.turtleDetailsId as string;
+  const turtleIdParam = params.turtleDetailsId;
+  
+  // Asegurar que turtleId sea un string. Para rutas como [param], debería serlo.
+  // Para rutas catch-all [...param], podría ser un array.
+  const turtleId = Array.isArray(turtleIdParam) ? turtleIdParam[0] : turtleIdParam;
 
-  const turtleInfo = seaTurtleSpeciesData.find(t => t.id === turtleId) || 
-                     { id: turtleId, name: turtleId.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '), scientificName: "N/A" };
+  if (!turtleId || typeof turtleId !== 'string') {
+    // Esto maneja el caso donde turtleId no está presente o no es un string
+    return (
+      <div className="container mx-auto px-4 py-12 text-center">
+        <h1 className="text-2xl font-bold text-destructive">Error</h1>
+        <p className="text-muted-foreground">No se pudo determinar el ID de la tortuga desde la URL.</p>
+        <Button asChild variant="link" className="mt-4">
+          <Link href="/species/sea-turtles">Volver a Tortugas Marinas</Link>
+        </Button>
+      </div>
+    );
+  }
+
+  const foundTurtle = seaTurtleSpeciesData.find(t => t.id === turtleId);
+
+  const turtleInfo = foundTurtle || {
+    id: turtleId,
+    name: turtleId.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
+    scientificName: "N/A (Especie no documentada en nuestros datos)",
+  };
 
   return (
     <div className="container mx-auto px-4 py-12 space-y-12">
@@ -74,7 +96,6 @@ export default function TurtleDetailsPage() {
         </p>
       </header>
 
-      {/* Sección de Imagen Principal y Galería Placeholder */}
       <Card className="shadow-xl rounded-xl overflow-hidden">
         <CardHeader>
           <CardTitle className="flex items-center"><ImageIcon className="mr-2 h-6 w-6 text-primary" /> Imagen Destacada</CardTitle>
@@ -82,17 +103,16 @@ export default function TurtleDetailsPage() {
         <CardContent>
           <div className="w-full h-96 relative rounded-md overflow-hidden bg-muted">
             <Image
-              src={`https://placehold.co/800x600.png?text=${turtleInfo.name.replace(/\s/g, '+')}`}
-              alt={`Imagen destacada de ${turtleInfo.name}`}
+              src={`https://placehold.co/800x600.png?text=${turtleInfo.name ? turtleInfo.name.replace(/\s/g, '+') : 'Imagen'}`}
+              alt={`Imagen destacada de ${turtleInfo.name || 'tortuga'}`}
               layout="fill"
               objectFit="cover"
-              data-ai-hint={`${turtleInfo.id} turtle underwater`}
+              data-ai-hint={`${turtleInfo.id || 'unknown'} turtle underwater`}
             />
           </div>
           <div className="mt-4">
             <h3 className="text-lg font-semibold mb-2 text-primary">Galería de Imágenes</h3>
             <p className="text-muted-foreground text-sm">(Próximamente: más imágenes aquí)</p>
-            {/* Placeholder para la galería */}
             <div className="grid grid-cols-3 gap-4 mt-2">
               {[1,2,3].map(i => (
                 <div key={i} className="w-full h-32 bg-muted rounded flex items-center justify-center text-muted-foreground text-xs">
@@ -104,7 +124,6 @@ export default function TurtleDetailsPage() {
         </CardContent>
       </Card>
 
-      {/* Sección de Datos Graficados */}
       <Card className="shadow-xl rounded-xl overflow-hidden">
         <CardHeader>
           <CardTitle className="flex items-center">
@@ -113,7 +132,6 @@ export default function TurtleDetailsPage() {
           <CardDescription>Visualizaciones de datos relevantes para {turtleInfo.name}. (Datos de ejemplo)</CardDescription>
         </CardHeader>
         <CardContent className="space-y-8">
-          {/* Gráfico 1: Tamaño vs Edad */}
           <Card>
             <CardHeader>
               <CardTitle className="text-xl flex items-center">
@@ -140,7 +158,6 @@ export default function TurtleDetailsPage() {
             </CardContent>
           </Card>
 
-          {/* Gráfico 2: Peso Promedio por Especie */}
           <Card>
             <CardHeader>
               <CardTitle className="text-xl flex items-center">
@@ -169,7 +186,6 @@ export default function TurtleDetailsPage() {
             </CardContent>
           </Card>
 
-          {/* Placeholder para más gráficos */}
            <Card>
             <CardHeader>
               <CardTitle className="text-xl flex items-center">
@@ -194,6 +210,3 @@ export default function TurtleDetailsPage() {
     </div>
   );
 }
-
-
-    
