@@ -17,7 +17,6 @@ interface SeaTurtleSpecies {
   shortDescription: string;
   conservationStatus: string;
   funFact: string;
-  indagarMasUrl: string;
 }
 
 const seaTurtleSpeciesData: SeaTurtleSpecies[] = [
@@ -30,7 +29,6 @@ const seaTurtleSpeciesData: SeaTurtleSpecies[] = [
     shortDescription: 'Reconocible por su cabeza grande y fuertes mandíbulas, adaptadas para triturar presas de caparazón duro.',
     conservationStatus: 'En Peligro',
     funFact: 'Pueden vivir hasta 50 años o más en la naturaleza.',
-    indagarMasUrl: '#', // Placeholder, replace with actual detail page URL
   },
   {
     id: 'green',
@@ -41,7 +39,6 @@ const seaTurtleSpeciesData: SeaTurtleSpecies[] = [
     shortDescription: 'Principalmente herbívora en su etapa adulta, se alimenta de pastos marinos y algas.',
     conservationStatus: 'En Peligro',
     funFact: 'Su grasa corporal es de color verdoso, de ahí su nombre.',
-    indagarMasUrl: '#',
   },
   {
     id: 'leatherback',
@@ -52,7 +49,6 @@ const seaTurtleSpeciesData: SeaTurtleSpecies[] = [
     shortDescription: 'La más grande de todas las tortugas marinas, con un caparazón flexible y correoso en lugar de óseo.',
     conservationStatus: 'Vulnerable',
     funFact: 'Puede sumergirse a profundidades de más de 1,000 metros.',
-    indagarMasUrl: '#',
   },
   {
     id: 'hawksbill',
@@ -63,7 +59,6 @@ const seaTurtleSpeciesData: SeaTurtleSpecies[] = [
     shortDescription: 'Identificada por su pico afilado y puntiagudo, similar al de un ave rapaz, que usa para alimentarse de esponjas.',
     conservationStatus: 'En Peligro Crítico',
     funFact: 'Su caparazón tiene un hermoso patrón ambarino, lo que lamentablemente la hizo objetivo de caza.',
-    indagarMasUrl: '#',
   },
   {
     id: 'kemps-ridley',
@@ -74,7 +69,6 @@ const seaTurtleSpeciesData: SeaTurtleSpecies[] = [
     shortDescription: 'La especie de tortuga marina más pequeña y la que se encuentra en mayor peligro de extinción.',
     conservationStatus: 'En Peligro Crítico',
     funFact: 'Son famosas por sus anidaciones masivas sincronizadas, llamadas "arribadas".',
-    indagarMasUrl: '#',
   },
   {
     id: 'olive-ridley',
@@ -85,7 +79,6 @@ const seaTurtleSpeciesData: SeaTurtleSpecies[] = [
     shortDescription: 'Junto con la Lora, es conocida por sus espectaculares arribadas de anidación.',
     conservationStatus: 'Vulnerable',
     funFact: 'Su nombre proviene del color oliva de su caparazón.',
-    indagarMasUrl: '#',
   },
 ];
 
@@ -164,7 +157,7 @@ export default function SeaTurtlesPage() {
                   </div>
                   
                   <Button asChild size="sm" className="w-full mt-3">
-                    <Link href={turtle.indagarMasUrl}>
+                    <Link href={`/species/sea-turtles/${turtle.id}`}>
                       <Search className="mr-2 h-4 w-4" />
                       Indagar Más
                     </Link>
@@ -184,4 +177,3 @@ export default function SeaTurtlesPage() {
     </div>
   );
 }
-
