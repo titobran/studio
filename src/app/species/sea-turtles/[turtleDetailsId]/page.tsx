@@ -35,16 +35,21 @@ const averageWeightData = [
   { id: 'hawksbill', name: "T. Carey", weight: 60 },
   { id: 'loggerhead', name: "T. Caguama", weight: 135 },
   { id: 'kemps-ridley', name: "T. Lora", weight: 45 },
-  { id: 'olive-ridley', name: "T. Golfina", weight: 45 },
+  { id: 'olive-ridley', name: "T. Golfina", weight: 45 }, // Añadido
 ];
 
-const chartConfigSizeVsAge: ChartConfig = {
-  length: { label: "Longitud (cm)", color: "hsl(var(--primary))" },
-};
+// Nuevos datos de ejemplo para el gráfico de nidos por playa
+const nidosPorPlayaData = [
+  { playa: "Playa Tortuga", nidos: 120 },
+  { playa: "Playa Escondida", nidos: 75 },
+  { playa: "Playa Paraíso", nidos: 200 },
+  { playa: "Costa Rocosa", nidos: 90 },
+];
 
-const chartConfigAvgWeight: ChartConfig = {
+const chartConfig: ChartConfig = {
+  length: { label: "Longitud (cm)", color: "hsl(var(--primary))" },
   weight: { label: "Peso Promedio (kg)", color: "hsl(var(--accent))" },
-  // currentWeight: { label: "Peso Promedio (kg) - Actual", color: "hsl(var(--primary))" }, // No se usa explícitamente para colorear
+  nidos: { label: "Número de Nidos", color: "hsl(var(--chart-3))" }, // Nueva config para nidos
 };
 
 
@@ -143,8 +148,11 @@ export default function TurtleDetailsPage() {
               <CardDescription>Relación entre la edad (años) y la longitud del caparazón (cm) para {turtleInfo.name}.</CardDescription>
             </CardHeader>
             <CardContent>
-              <ChartContainer config={chartConfigSizeVsAge} className="h-[350px] w-full">
-                  <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }} data={sizeVsAgeData}>
+              <ChartContainer config={chartConfig} className="h-[350px] w-full">
+                  <ScatterChart 
+                    data={sizeVsAgeData}
+                    margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+                  >
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis type="number" dataKey="age" name="Edad (años)" unit=" años" stroke="hsl(var(--muted-foreground))" />
                     <YAxis type="number" dataKey="length" name="Longitud (cm)" unit=" cm" stroke="hsl(var(--muted-foreground))" />
@@ -167,11 +175,14 @@ export default function TurtleDetailsPage() {
               <CardDescription>Comparación del peso promedio (kg) entre diferentes especies de tortugas marinas. La especie actual ({turtleInfo.name}) está resaltada.</CardDescription>
             </CardHeader>
             <CardContent>
-              <ChartContainer config={chartConfigAvgWeight} className="h-[350px] w-full">
-                  <BarChart data={processedAverageWeightData} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+              <ChartContainer config={chartConfig} className="h-[350px] w-full">
+                  <BarChart 
+                    data={processedAverageWeightData} 
+                    margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+                  >
                     <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                    <XAxis dataKey="name" stroke="hsl(var(--muted-foreground))" />
-                    <YAxis unit=" kg" stroke="hsl(var(--muted-foreground))" />
+                    <XAxis dataKey="name" stroke="hsl(var(--muted-foreground))" tickLine={false} axisLine={false} />
+                    <YAxis unit=" kg" stroke="hsl(var(--muted-foreground))" tickLine={false} axisLine={false}/>
                     <RechartsTooltip 
                       cursor={{ fill: 'hsl(var(--muted)/0.3)' }}
                       content={<ChartTooltipContent />} 
@@ -189,6 +200,36 @@ export default function TurtleDetailsPage() {
                        }
                     </Bar>
                   </BarChart>
+              </ChartContainer>
+            </CardContent>
+          </Card>
+
+          {/* Nuevo Gráfico: Número de Nidos por Playa */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-xl flex items-center">
+                <BarChart2 className="mr-2 h-5 w-5 text-primary" />Número de Nidos por Playa
+              </CardTitle>
+              <CardDescription>Cantidad de nidos registrados en diferentes playas para {turtleInfo.name}. (Datos de ejemplo)</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ChartContainer config={chartConfig} className="h-[350px] w-full">
+                <BarChart 
+                  data={nidosPorPlayaData}
+                  margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                  <XAxis dataKey="playa" stroke="hsl(var(--muted-foreground))" tickLine={false} axisLine={false} />
+                  <YAxis unit=" nidos" stroke="hsl(var(--muted-foreground))" tickLine={false} axisLine={false} />
+                  <RechartsTooltip 
+                    cursor={{ fill: 'hsl(var(--muted)/0.3)' }}
+                    content={<ChartTooltipContent />}
+                  />
+                  <RechartsLegend content={<ChartLegend />} />
+                  <Bar dataKey="nidos" fill="var(--color-nidos)" radius={[4, 4, 0, 0]}>
+                    <LabelList dataKey="nidos" position="top" offset={5} fontSize={10} formatter={(value: number) => `${value}`} />
+                  </Bar>
+                </BarChart>
               </ChartContainer>
             </CardContent>
           </Card>
