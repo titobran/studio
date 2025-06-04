@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Turtle, Newspaper, ShoppingBag, FlaskConical, Quote, MessageSquarePlus } from 'lucide-react'; 
+import { Turtle, Newspaper, FlaskConical, Quote, MessageSquarePlus } from 'lucide-react'; 
 
 interface ContentSection {
   id: string;
@@ -35,15 +35,6 @@ const contentSections: ContentSection[] = [
     href: '/news',
     imgPlaceholder: 'https://placehold.co/600x400.png',
     dataAiHint: 'ocean waves',
-  },
-  {
-    id: 'products',
-    title: 'Productos Sostenibles',
-    description: 'Explora productos y servicios que apoyan la salud de los océanos y promueven prácticas sostenibles.',
-    icon: ShoppingBag,
-    href: '/products',
-    imgPlaceholder: 'https://placehold.co/600x400.png',
-    dataAiHint: 'eco friendly',
   },
   {
     id: 'research',
