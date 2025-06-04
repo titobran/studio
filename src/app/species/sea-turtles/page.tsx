@@ -115,7 +115,7 @@ export default function SeaTurtlesPage() {
         {seaTurtleSpeciesData.map((turtle, index) => (
           <HoverCard key={turtle.id} openDelay={200} closeDelay={100}>
             <Card 
-              className="rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-500 ease-out"
+              className="rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-500 ease-out group"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <HoverCardTrigger asChild>
@@ -146,7 +146,7 @@ export default function SeaTurtlesPage() {
                 </div>
               </HoverCardTrigger>
               <HoverCardContent
-                side="top"
+                side={index % 3 === 2 ? 'left' : 'right'}
                 align="center"
                 className="w-80 rounded-lg shadow-xl p-5 bg-popover text-popover-foreground"
               >
