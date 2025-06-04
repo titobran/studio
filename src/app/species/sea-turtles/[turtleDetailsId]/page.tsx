@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { ArrowLeft, Image as ImageIcon, BarChart2, ScatterChart as ScatterChartIcon, HelpCircle } from 'lucide-react';
 import { ChartContainer, ChartTooltipContent, ChartLegend } from "@/components/ui/chart";
 import type { ChartConfig } from "@/components/ui/chart";
-import { BarChart, Bar, ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend as RechartsLegend, ResponsiveContainer, LabelList, Cell } from 'recharts';
+import { BarChart, Bar, ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend as RechartsLegend, LabelList, Cell } from 'recharts';
 
 // Datos de ejemplo para las especies de tortugas (para obtener el nombre)
 const seaTurtleSpeciesData = [
@@ -35,17 +35,15 @@ const averageWeightData = [
   { id: 'hawksbill', name: "T. Carey", weight: 60 },
   { id: 'loggerhead', name: "T. Caguama", weight: 135 },
   { id: 'kemps-ridley', name: "T. Lora", weight: 45 },
-  { id: 'olive-ridley', name: "T. Golfina", weight: 45 },
+  { id: 'olive-ridley', name: "T. Golfina", weight: 45 }, // Añadida Tortuga Golfina
 ];
 
 const chartConfigSizeVsAge: ChartConfig = {
   length: { label: "Longitud (cm)", color: "hsl(var(--primary))" },
 };
 
-// Config para el gráfico de peso promedio. El color general es accent, pero se anulará por celda.
 const chartConfigAvgWeight: ChartConfig = {
   weight: { label: "Peso Promedio (kg)", color: "hsl(var(--accent))" },
-   // Podríamos añadir un color primario para la leyenda si quisiéramos diferenciarlo
   currentWeight: { label: "Peso Promedio (kg) - Actual", color: "hsl(var(--primary))" },
 };
 
@@ -76,12 +74,8 @@ export default function TurtleDetailsPage() {
     scientificName: "N/A (Especie no documentada en nuestros datos)",
   };
 
-  // Modificamos los datos para el gráfico de peso promedio para la leyenda
   const processedAverageWeightData = averageWeightData.map(item => ({
     ...item,
-    // Usamos diferentes dataKeys para la leyenda si es necesario
-    // Esto es más para control de leyenda si se requiere mostrar "Actual" vs "Otros"
-    // Para el color de la barra, Cell es suficiente.
   }));
 
 
@@ -150,7 +144,6 @@ export default function TurtleDetailsPage() {
             </CardHeader>
             <CardContent>
               <ChartContainer config={chartConfigSizeVsAge} className="h-[350px] w-full">
-                <ResponsiveContainer>
                   <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis type="number" dataKey="age" name="Edad (años)" unit=" años" stroke="hsl(var(--muted-foreground))" />
@@ -162,7 +155,6 @@ export default function TurtleDetailsPage() {
                     <RechartsLegend content={<ChartLegend />} />
                     <Scatter name="Longitud" data={sizeVsAgeData} fill="var(--color-length)" />
                   </ScatterChart>
-                </ResponsiveContainer>
               </ChartContainer>
             </CardContent>
           </Card>
@@ -176,7 +168,6 @@ export default function TurtleDetailsPage() {
             </CardHeader>
             <CardContent>
               <ChartContainer config={chartConfigAvgWeight} className="h-[350px] w-full">
-                <ResponsiveContainer>
                   <BarChart data={processedAverageWeightData} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
                     <CartesianGrid strokeDasharray="3 3" vertical={false} />
                     <XAxis dataKey="name" stroke="hsl(var(--muted-foreground))" />
@@ -185,7 +176,6 @@ export default function TurtleDetailsPage() {
                       cursor={{ fill: 'hsl(var(--muted)/0.3)' }}
                       content={<ChartTooltipContent />} 
                     />
-                    {/* La leyenda puede necesitar ajustes si queremos diferenciar explícitamente "actual" vs "otras" */}
                     <RechartsLegend content={<ChartLegend />} /> 
                     <Bar dataKey="weight" radius={[4, 4, 0, 0]}>
                        <LabelList dataKey="weight" position="top" offset={5} fontSize={10} formatter={(value: number) => `${value} kg`} />
@@ -199,7 +189,6 @@ export default function TurtleDetailsPage() {
                        }
                     </Bar>
                   </BarChart>
-                </ResponsiveContainer>
               </ChartContainer>
             </CardContent>
           </Card>
