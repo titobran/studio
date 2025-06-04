@@ -5,9 +5,9 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Newspaper } from 'lucide-react';
-import { useState } from 'react'; // Import useState
-import { Input } from '@/components/ui/input'; // Import Input
+import { Newspaper, ChevronsDown } from 'lucide-react';
+import { useState, useMemo } from 'react'; 
+import { Input } from '@/components/ui/input'; 
 
 interface NewsArticle {
   id: string;
@@ -17,10 +17,12 @@ interface NewsArticle {
   dataAiHint: string;
   publicationDate: string;
   source: string;
-  articleUrl: string; // Placeholder for full article link
+  articleUrl: string; 
 }
 
-const newsArticles: NewsArticle[] = [
+const ARTICLES_PER_LOAD = 3; // Number of articles to load at a time
+
+const allNewsArticles: NewsArticle[] = [
   {
     id: 'new-species-discovery-2025',
     title: 'Descubren Nueva Especie Bioluminiscente en la Fosa de las Marianas',
@@ -61,15 +63,68 @@ const newsArticles: NewsArticle[] = [
     source: 'Revista Científica Marina',
     articleUrl: '/news/ocean-acidification-impact-2025',
   },
+  {
+    id: 'new-ocean-tech-2025',
+    title: 'Tecnología Revolucionaria Permite Comunicación con Delfines',
+    summary: 'Un equipo de científicos ha desarrollado un dispositivo que traduce los silbidos de los delfines a lenguaje humano, abriendo nuevas fronteras en la comunicación inter-especies.',
+    imageUrl: 'https://placehold.co/600x400.png',
+    dataAiHint: 'dolphin communication',
+    publicationDate: '15 de Junio, 2025',
+    source: 'Avances en Bioacústica Marina',
+    articleUrl: '/news/new-ocean-tech-2025',
+  },
+  {
+    id: 'underwater-volcano-discovery-2025',
+    title: 'Descubren Volcán Submarino Activo Cerca de las Costas de Japón',
+    summary: 'Una expedición oceanográfica ha confirmado la existencia de un volcán submarino previamente desconocido que muestra signos de actividad reciente, lo que podría impactar la geología local.',
+    imageUrl: 'https://placehold.co/600x400.png',
+    dataAiHint: 'underwater volcano',
+    publicationDate: '28 de Junio, 2025',
+    source: 'Centro Geológico del Pacífico',
+    articleUrl: '/news/underwater-volcano-discovery-2025',
+  },
+   {
+    id: 'marine-protected-area-expansion-2025',
+    title: 'Expansión Global de Áreas Marinas Protegidas Supera Objetivos',
+    summary: 'Un informe internacional confirma que la expansión de áreas marinas protegidas ha superado los objetivos para 2025, aunque se necesita más trabajo para asegurar su efectividad.',
+    imageUrl: 'https://placehold.co/600x400.png',
+    dataAiHint: 'marine protection',
+    publicationDate: '10 de Julio, 2025',
+    source: 'ONU Medio Ambiente',
+    articleUrl: '/news/marine-protected-area-expansion-2025',
+  },
+  {
+    id: 'whale-migration-patterns-shift-2025',
+    title: 'Cambios en Patrones Migratorios de Ballenas Preocupan a Científicos',
+    summary: 'Nuevos datos satelitales muestran alteraciones significativas en las rutas migratorias de varias especies de ballenas, posiblemente debido al cambio climático.',
+    imageUrl: 'https://placehold.co/600x400.png',
+    dataAiHint: 'whale migration',
+    publicationDate: '22 de Julio, 2025',
+    source: 'Sociedad de Conservación Marina',
+    articleUrl: '/news/whale-migration-patterns-shift-2025',
+  }
 ];
 
 export default function NewsPage() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [visibleArticleCount, setVisibleArticleCount] = useState(ARTICLES_PER_LOAD);
 
-  const filteredArticles = newsArticles.filter(article =>
-    article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    article.summary.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const searchFilteredArticles = useMemo(() => {
+    return allNewsArticles.filter(article =>
+      article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      article.summary.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [searchTerm]);
+
+  const displayedArticles = useMemo(() => {
+    return searchFilteredArticles.slice(0, visibleArticleCount);
+  }, [searchFilteredArticles, visibleArticleCount]);
+
+  const handleLoadMore = () => {
+    setVisibleArticleCount(prevCount => prevCount + ARTICLES_PER_LOAD);
+  };
+
+  const canLoadMore = visibleArticleCount < searchFilteredArticles.length;
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -90,14 +145,17 @@ export default function NewsPage() {
           type="text"
           placeholder="Buscar noticias por título o resumen..."
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            setVisibleArticleCount(ARTICLES_PER_LOAD); // Reset count on new search
+          }}
           className="w-full text-base shadow-sm"
         />
       </div>
 
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-1"> {/* Single column for better readability of news items */}
-        {filteredArticles.length > 0 ? (
-          filteredArticles.map((article, index) => (
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-1"> {/* Single column for better readability */}
+        {displayedArticles.length > 0 ? (
+          displayedArticles.map((article, index) => (
             <Card
               key={article.id}
               className="flex flex-col md:flex-row rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-500 ease-out"
@@ -136,10 +194,19 @@ export default function NewsPage() {
           ))
         ) : (
           <p className="text-center text-muted-foreground col-span-full py-10 text-lg">
-            No se encontraron noticias que coincidan con &quot;{searchTerm}&quot;.
+            {searchTerm ? `No se encontraron noticias que coincidan con "${searchTerm}".` : "No hay noticias para mostrar."}
           </p>
         )}
       </div>
+
+      {canLoadMore && (
+        <div className="mt-12 text-center">
+          <Button onClick={handleLoadMore} variant="outline" size="lg">
+            <ChevronsDown className="mr-2 h-5 w-5" />
+            Cargar Más Noticias
+          </Button>
+        </div>
+      )}
 
       <div className="mt-16 text-center">
         <Button asChild variant="link">
@@ -149,3 +216,4 @@ export default function NewsPage() {
     </div>
   );
 }
+
