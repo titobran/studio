@@ -5,7 +5,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Turtle, Star, Sparkles, VenetianMask, Anchor } from 'lucide-react'; // Using VenetianMask for Mantis Shrimp, Anchor for Whale
+import { Turtle, Star, Sparkles, VenetianMask, Anchor, LineChart } from 'lucide-react'; // Using VenetianMask for Mantis Shrimp, Anchor for Whale
 
 interface MarineAnimal {
   id: string;
@@ -14,7 +14,7 @@ interface MarineAnimal {
   icon: React.ElementType;
   imageUrl: string;
   dataAiHint: string;
-  detailsPageUrl: string;
+  analyticsPageUrl: string; // Changed from detailsPageUrl
 }
 
 const marineAnimals: MarineAnimal[] = [
@@ -25,7 +25,7 @@ const marineAnimals: MarineAnimal[] = [
     icon: Turtle,
     imageUrl: 'https://placehold.co/600x400.png',
     dataAiHint: 'sea turtle',
-    detailsPageUrl: '/species/sea-turtles', // Placeholder link
+    analyticsPageUrl: '/species/sea-turtles/analytics', 
   },
   {
     id: 'starfish',
@@ -34,34 +34,34 @@ const marineAnimals: MarineAnimal[] = [
     icon: Star,
     imageUrl: 'https://placehold.co/600x400.png',
     dataAiHint: 'starfish ocean',
-    detailsPageUrl: '/species/starfish', // Placeholder link
+    analyticsPageUrl: '/species/starfish/analytics', 
   },
   {
     id: 'corals',
     name: 'Corales',
     description: 'Explora los vibrantes arrecifes de coral, los "bosques tropicales del mar", y su crucial papel ecológico.',
-    icon: Sparkles, // Using Sparkles as a generic representation of coral beauty
+    icon: Sparkles, 
     imageUrl: 'https://placehold.co/600x400.png',
     dataAiHint: 'coral reef',
-    detailsPageUrl: '/species/corals', // Placeholder link
+    analyticsPageUrl: '/species/corals/analytics', 
   },
   {
     id: 'mantis-shrimp',
     name: 'Camarón Mantis',
     description: 'Conoce al camarón mantis, famoso por su poderosa pegada y su compleja visión.',
-    icon: VenetianMask, // Placeholder icon, consider a more fitting one or custom SVG
+    icon: VenetianMask, 
     imageUrl: 'https://placehold.co/600x400.png',
     dataAiHint: 'mantis shrimp',
-    detailsPageUrl: '/species/mantis-shrimp', // Placeholder link
+    analyticsPageUrl: '/species/mantis-shrimp/analytics', 
   },
   {
     id: 'whales',
     name: 'Ballenas',
     description: 'Aprende sobre los gigantes del océano, desde la ballena azul hasta las juguetonas jorobadas.',
-    icon: Anchor, // Using Anchor as a placeholder for Whale
+    icon: Anchor, 
     imageUrl: 'https://placehold.co/600x400.png',
     dataAiHint: 'whale ocean',
-    detailsPageUrl: '/species/whales', // Placeholder link
+    analyticsPageUrl: '/species/whales/analytics', 
   },
 ];
 
@@ -69,6 +69,9 @@ export default function SpeciesPage() {
   return (
     <div className="container mx-auto px-4 py-12">
       <header className="text-center mb-12">
+        <div className="inline-flex items-center justify-center bg-primary/10 p-3 rounded-full mb-4">
+          <Turtle className="h-10 w-10 text-primary" />
+        </div>
         <h1 className="text-4xl font-bold tracking-tight text-primary sm:text-5xl">
           Explora las Especies Marinas
         </h1>
@@ -94,19 +97,25 @@ export default function SpeciesPage() {
               />
             </div>
             <CardHeader className="p-6">
-              <CardTitle className="text-2xl font-semibold flex items-center">
+              <CardTitle className="text-xl font-semibold flex items-center">
                 <animal.icon className="h-6 w-6 mr-2 text-primary" />
                 {animal.name}
               </CardTitle>
             </CardHeader>
             <CardContent className="flex-grow p-6 pt-0">
-              <CardDescription className="text-sm text-muted-foreground">
+              <CardDescription className="text-sm text-muted-foreground line-clamp-3">
                 {animal.description}
               </CardDescription>
             </CardContent>
-            <CardFooter className="p-6 bg-muted/30">
-              <Button asChild variant="outline" className="w-full">
-                <Link href={animal.detailsPageUrl}>Saber Más</Link>
+            <CardFooter className="p-6 bg-muted/30 flex flex-col sm:flex-row gap-2">
+              <Button asChild variant="outline" className="w-full sm:flex-1">
+                <Link href={`/species/${animal.id}`}>Saber Más</Link> 
+              </Button>
+              <Button asChild variant="default" className="w-full sm:flex-1">
+                <Link href={animal.analyticsPageUrl} className="flex items-center justify-center">
+                  <LineChart className="mr-2 h-4 w-4" />
+                  Ver Análisis
+                </Link>
               </Button>
             </CardFooter>
           </Card>
@@ -121,3 +130,4 @@ export default function SpeciesPage() {
     </div>
   );
 }
+
