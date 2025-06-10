@@ -6,10 +6,7 @@ import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { ArrowLeft, Image as ImageIcon, BarChart2, ScatterChart as ScatterChartIcon, HelpCircle } from 'lucide-react';
-import { ChartContainer, ChartTooltipContent, ChartLegend } from "@/components/ui/chart";
-import type { ChartConfig } from "@/components/ui/chart";
-import { BarChart, Bar, ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend as RechartsLegend, LabelList, Cell } from 'recharts';
+import { ArrowLeft, Image as ImageIcon, HelpCircle } from 'lucide-react';
 
 // Datos de ejemplo para las especies de tortugas (para obtener el nombre)
 const seaTurtleSpeciesData = [
@@ -20,38 +17,6 @@ const seaTurtleSpeciesData = [
   { id: 'kemps-ridley', name: 'Tortuga Lora', scientificName: 'Lepidochelys kempii' },
   { id: 'olive-ridley', name: 'Tortuga Golfina', scientificName: 'Lepidochelys olivacea' },
 ];
-
-// Datos de ejemplo para gráficos
-const sizeVsAgeData = [
-  { age: 1, length: 20, weight: 1 }, { age: 5, length: 40, weight: 10 },
-  { age: 10, length: 60, weight: 50 }, { age: 15, length: 75, weight: 100 },
-  { age: 20, length: 90, weight: 150 }, { age: 25, length: 100, weight: 200 },
-  { age: 30, length: 105, weight: 220 }, { age: 35, length: 110, weight: 230 },
-];
-
-const averageWeightData = [
-  { id: 'green', name: "T. Verde", weight: 150 },
-  { id: 'leatherback', name: "T. Laúd", weight: 400 },
-  { id: 'hawksbill', name: "T. Carey", weight: 60 },
-  { id: 'loggerhead', name: "T. Caguama", weight: 135 },
-  { id: 'kemps-ridley', name: "T. Lora", weight: 45 },
-  { id: 'olive-ridley', name: "T. Golfina", weight: 45 }, // Añadido
-];
-
-// Nuevos datos de ejemplo para el gráfico de nidos por playa
-const nidosPorPlayaData = [
-  { playa: "Playa Tortuga", nidos: 120 },
-  { playa: "Playa Escondida", nidos: 75 },
-  { playa: "Playa Paraíso", nidos: 200 },
-  { playa: "Costa Rocosa", nidos: 90 },
-];
-
-const chartConfig: ChartConfig = {
-  length: { label: "Longitud (cm)", color: "hsl(var(--primary))" },
-  weight: { label: "Peso Promedio (kg)", color: "hsl(var(--accent))" },
-  nidos: { label: "Número de Nidos", color: "hsl(var(--chart-3))" }, // Nueva config para nidos
-};
-
 
 export default function TurtleDetailsPage() {
   const params = useParams();
@@ -78,11 +43,6 @@ export default function TurtleDetailsPage() {
     name: turtleId.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
     scientificName: "N/A (Especie no documentada en nuestros datos)",
   };
-
-  const processedAverageWeightData = averageWeightData.map(item => ({
-    ...item,
-  }));
-
 
   return (
     <div className="container mx-auto px-4 py-12 space-y-12">
@@ -135,118 +95,13 @@ export default function TurtleDetailsPage() {
       <Card className="shadow-xl rounded-xl overflow-hidden">
         <CardHeader>
           <CardTitle className="flex items-center">
-            <BarChart2 className="mr-2 h-6 w-6 text-primary" /> Datos Graficados
+            <HelpCircle className="mr-2 h-5 w-5 text-muted-foreground" /> Más Información Próximamente
           </CardTitle>
-          <CardDescription>Visualizaciones de datos relevantes para {turtleInfo.name}. (Datos de ejemplo)</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-8">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-xl flex items-center">
-                <ScatterChartIcon className="mr-2 h-5 w-5 text-primary" />Crecimiento: Tamaño vs Edad
-              </CardTitle>
-              <CardDescription>Relación entre la edad (años) y la longitud del caparazón (cm) para {turtleInfo.name}.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ChartContainer config={chartConfig} className="h-[350px] w-full">
-                  <ScatterChart 
-                    data={sizeVsAgeData}
-                    margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis type="number" dataKey="age" name="Edad (años)" unit=" años" stroke="hsl(var(--muted-foreground))" />
-                    <YAxis type="number" dataKey="length" name="Longitud (cm)" unit=" cm" stroke="hsl(var(--muted-foreground))" />
-                    <RechartsTooltip 
-                      cursor={{ strokeDasharray: '3 3' }} 
-                      content={<ChartTooltipContent indicator="dot" />}
-                    />
-                    <RechartsLegend content={<ChartLegend />} />
-                    <Scatter name="Longitud" dataKey="length" fill="var(--color-length)" />
-                  </ScatterChart>
-              </ChartContainer>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-xl flex items-center">
-                <BarChart2 className="mr-2 h-5 w-5 text-primary" />Peso Promedio por Especie
-              </CardTitle>
-              <CardDescription>Comparación del peso promedio (kg) entre diferentes especies de tortugas marinas. La especie actual ({turtleInfo.name}) está resaltada.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ChartContainer config={chartConfig} className="h-[350px] w-full">
-                  <BarChart 
-                    data={processedAverageWeightData} 
-                    margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                    <XAxis dataKey="name" stroke="hsl(var(--muted-foreground))" tickLine={false} axisLine={false} />
-                    <YAxis unit=" kg" stroke="hsl(var(--muted-foreground))" tickLine={false} axisLine={false}/>
-                    <RechartsTooltip 
-                      cursor={{ fill: 'hsl(var(--muted)/0.3)' }}
-                      content={<ChartTooltipContent />} 
-                    />
-                    <RechartsLegend content={<ChartLegend />} /> 
-                    <Bar dataKey="weight" radius={[4, 4, 0, 0]}>
-                       <LabelList dataKey="weight" position="top" offset={5} fontSize={10} formatter={(value: number) => `${value} kg`} />
-                       {
-                        processedAverageWeightData.map((entry, index) => (
-                          <Cell 
-                            key={`cell-${index}`} 
-                            fill={entry.id === turtleId ? "hsl(var(--primary))" : "hsl(var(--accent))"} 
-                            />
-                        ))
-                       }
-                    </Bar>
-                  </BarChart>
-              </ChartContainer>
-            </CardContent>
-          </Card>
-
-          {/* Nuevo Gráfico: Número de Nidos por Playa */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-xl flex items-center">
-                <BarChart2 className="mr-2 h-5 w-5 text-primary" />Número de Nidos por Playa
-              </CardTitle>
-              <CardDescription>Cantidad de nidos registrados en diferentes playas para {turtleInfo.name}. (Datos de ejemplo)</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ChartContainer config={chartConfig} className="h-[350px] w-full">
-                <BarChart 
-                  data={nidosPorPlayaData}
-                  margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                  <XAxis dataKey="playa" stroke="hsl(var(--muted-foreground))" tickLine={false} axisLine={false} />
-                  <YAxis unit=" nidos" stroke="hsl(var(--muted-foreground))" tickLine={false} axisLine={false} />
-                  <RechartsTooltip 
-                    cursor={{ fill: 'hsl(var(--muted)/0.3)' }}
-                    content={<ChartTooltipContent />}
-                  />
-                  <RechartsLegend content={<ChartLegend />} />
-                  <Bar dataKey="nidos" fill="var(--color-nidos)" radius={[4, 4, 0, 0]}>
-                    <LabelList dataKey="nidos" position="top" offset={5} fontSize={10} formatter={(value: number) => `${value}`} />
-                  </Bar>
-                </BarChart>
-              </ChartContainer>
-            </CardContent>
-          </Card>
-
-           <Card>
-            <CardHeader>
-              <CardTitle className="text-xl flex items-center">
-                <HelpCircle className="mr-2 h-5 w-5 text-muted-foreground" />Más Gráficos Próximamente
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">
-                Estamos trabajando para añadir más visualizaciones de datos sobre esperanza de vida, reproducción, hábitat y conservación. ¡Vuelve pronto!
-              </p>
-            </CardContent>
-          </Card>
-
+        <CardContent>
+          <p className="text-muted-foreground">
+            Estamos trabajando para añadir más detalles y datos interesantes sobre {turtleInfo.name}. ¡Vuelve pronto!
+          </p>
         </CardContent>
       </Card>
 
@@ -258,5 +113,3 @@ export default function TurtleDetailsPage() {
     </div>
   );
 }
-
-    
