@@ -7,10 +7,17 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
-import { Chrome, Facebook, Twitter, Mail, AppWindow } from 'lucide-react'; // AppWindow for Microsoft
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Chrome, Facebook, Twitter, Mail, AppWindow } from 'lucide-react';
 import { useState } from 'react';
 
 export default function RegisterPage() {
+  const [nombre, setNombre] = useState('');
+  const [segundoNombre, setSegundoNombre] = useState('');
+  const [apellido, setApellido] = useState('');
+  const [segundoApellido, setSegundoApellido] = useState('');
+  const [edad, setEdad] = useState('');
+  const [sexo, setSexo] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -18,18 +25,27 @@ export default function RegisterPage() {
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
     // TODO: Implement actual registration logic
-    console.log("Registering with:", { email, password, confirmPassword });
     if (password !== confirmPassword) {
-      alert("Passwords do not match!"); // Replace with proper toast/notification
+      alert("Las contraseñas no coinciden."); // Replace with proper toast/notification
       return;
     }
-    alert("Registration submitted (UI only)");
+    console.log("Registering with:", { 
+      nombre, 
+      segundoNombre, 
+      apellido, 
+      segundoApellido, 
+      edad, 
+      sexo, 
+      email, 
+      password 
+    });
+    alert("Registro enviado (solo UI)");
   };
 
   const handleSocialLogin = (provider: string) => {
     // TODO: Implement actual social login logic
-    console.log(`Attempting to register with ${provider}`);
-    alert(`Register with ${provider} (UI only)`);
+    console.log(`Intentando registrarse con ${provider}`);
+    alert(`Registrarse con ${provider} (solo UI)`);
   };
 
   return (
@@ -41,6 +57,80 @@ export default function RegisterPage() {
         </CardHeader>
         <CardContent className="space-y-6">
           <form onSubmit={handleRegister} className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="nombre">Nombre</Label>
+                <Input 
+                  id="nombre" 
+                  type="text" 
+                  placeholder="Tu nombre" 
+                  required 
+                  value={nombre}
+                  onChange={(e) => setNombre(e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="segundoNombre">Segundo Nombre (Opcional)</Label>
+                <Input 
+                  id="segundoNombre" 
+                  type="text" 
+                  placeholder="Tu segundo nombre" 
+                  value={segundoNombre}
+                  onChange={(e) => setSegundoNombre(e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="apellido">Apellido</Label>
+                <Input 
+                  id="apellido" 
+                  type="text" 
+                  placeholder="Tu apellido" 
+                  required 
+                  value={apellido}
+                  onChange={(e) => setApellido(e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="segundoApellido">Segundo Apellido (Opcional)</Label>
+                <Input 
+                  id="segundoApellido" 
+                  type="text" 
+                  placeholder="Tu segundo apellido" 
+                  value={segundoApellido}
+                  onChange={(e) => setSegundoApellido(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="edad">Edad</Label>
+                <Input 
+                  id="edad" 
+                  type="number" 
+                  placeholder="Tu edad" 
+                  required 
+                  value={edad}
+                  min="1"
+                  onChange={(e) => setEdad(e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="sexo">Sexo</Label>
+                <Select value={sexo} onValueChange={setSexo} required>
+                  <SelectTrigger id="sexo">
+                    <SelectValue placeholder="Selecciona tu sexo" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="masculino">Masculino</SelectItem>
+                    <SelectItem value="femenino">Femenino</SelectItem>
+                    <SelectItem value="otro">Otro</SelectItem>
+                    <SelectItem value="no-especificar">Prefiero no decirlo</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+            
             <div className="space-y-2">
               <Label htmlFor="email">Correo Electrónico</Label>
               <Input 
