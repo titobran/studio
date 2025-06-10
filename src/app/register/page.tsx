@@ -13,9 +13,7 @@ import { useState } from 'react';
 
 export default function RegisterPage() {
   const [nombre, setNombre] = useState('');
-  const [segundoNombre, setSegundoNombre] = useState('');
   const [apellido, setApellido] = useState('');
-  const [segundoApellido, setSegundoApellido] = useState('');
   const [edad, setEdad] = useState('');
   const [sexo, setSexo] = useState('');
   const [email, setEmail] = useState('');
@@ -31,9 +29,7 @@ export default function RegisterPage() {
     }
     console.log("Registering with:", { 
       nombre, 
-      segundoNombre, 
       apellido, 
-      segundoApellido, 
       edad, 
       sexo, 
       email, 
@@ -70,16 +66,6 @@ export default function RegisterPage() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="segundoNombre">Segundo Nombre (Opcional)</Label>
-                <Input 
-                  id="segundoNombre" 
-                  type="text" 
-                  placeholder="Tu segundo nombre" 
-                  value={segundoNombre}
-                  onChange={(e) => setSegundoNombre(e.target.value)}
-                />
-              </div>
-              <div className="space-y-2">
                 <Label htmlFor="apellido">Apellido</Label>
                 <Input 
                   id="apellido" 
@@ -88,16 +74,6 @@ export default function RegisterPage() {
                   required 
                   value={apellido}
                   onChange={(e) => setApellido(e.target.value)}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="segundoApellido">Segundo Apellido (Opcional)</Label>
-                <Input 
-                  id="segundoApellido" 
-                  type="text" 
-                  placeholder="Tu segundo apellido" 
-                  value={segundoApellido}
-                  onChange={(e) => setSegundoApellido(e.target.value)}
                 />
               </div>
             </div>
