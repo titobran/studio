@@ -5,7 +5,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Turtle, Star, Sparkles, VenetianMask, Anchor, LineChart } from 'lucide-react'; // Using VenetianMask for Mantis Shrimp, Anchor for Whale
+import { Turtle, Star, Sparkles, VenetianMask, Anchor } from 'lucide-react'; // Removed LineChart
 
 interface MarineAnimal {
   id: string;
@@ -14,7 +14,7 @@ interface MarineAnimal {
   icon: React.ElementType;
   imageUrl: string;
   dataAiHint: string;
-  analyticsPageUrl: string; // Changed from detailsPageUrl
+  detailsPageUrl: string; // Changed from analyticsPageUrl to detailsPageUrl (or just a general details)
 }
 
 const marineAnimals: MarineAnimal[] = [
@@ -25,7 +25,7 @@ const marineAnimals: MarineAnimal[] = [
     icon: Turtle,
     imageUrl: 'https://placehold.co/600x400.png',
     dataAiHint: 'sea turtle',
-    analyticsPageUrl: '/species/sea-turtles/analytics', 
+    detailsPageUrl: '/species/sea-turtles', // Link to the main sea turtles page
   },
   {
     id: 'starfish',
@@ -34,7 +34,7 @@ const marineAnimals: MarineAnimal[] = [
     icon: Star,
     imageUrl: 'https://placehold.co/600x400.png',
     dataAiHint: 'starfish ocean',
-    analyticsPageUrl: '/species/starfish/analytics', 
+    detailsPageUrl: '/species/starfish', // Placeholder, can be adjusted if a starfish details page is created
   },
   {
     id: 'corals',
@@ -43,7 +43,7 @@ const marineAnimals: MarineAnimal[] = [
     icon: Sparkles, 
     imageUrl: 'https://placehold.co/600x400.png',
     dataAiHint: 'coral reef',
-    analyticsPageUrl: '/species/corals/analytics', 
+    detailsPageUrl: '/species/corals', // Placeholder
   },
   {
     id: 'mantis-shrimp',
@@ -52,7 +52,7 @@ const marineAnimals: MarineAnimal[] = [
     icon: VenetianMask, 
     imageUrl: 'https://placehold.co/600x400.png',
     dataAiHint: 'mantis shrimp',
-    analyticsPageUrl: '/species/mantis-shrimp/analytics', 
+    detailsPageUrl: '/species/mantis-shrimp', // Placeholder
   },
   {
     id: 'whales',
@@ -61,7 +61,7 @@ const marineAnimals: MarineAnimal[] = [
     icon: Anchor, 
     imageUrl: 'https://placehold.co/600x400.png',
     dataAiHint: 'whale ocean',
-    analyticsPageUrl: '/species/whales/analytics', 
+    detailsPageUrl: '/species/whales', // Placeholder
   },
 ];
 
@@ -107,15 +107,9 @@ export default function SpeciesPage() {
                 {animal.description}
               </CardDescription>
             </CardContent>
-            <CardFooter className="p-6 bg-muted/30 flex flex-col sm:flex-row gap-2">
-              <Button asChild variant="outline" className="w-full sm:flex-1">
-                <Link href={`/species/${animal.id}`}>Saber Más</Link> 
-              </Button>
-              <Button asChild variant="default" className="w-full sm:flex-1">
-                <Link href={animal.analyticsPageUrl} className="flex items-center justify-center">
-                  <LineChart className="mr-2 h-4 w-4" />
-                  Ver Análisis
-                </Link>
+            <CardFooter className="p-6 bg-muted/30">
+              <Button asChild variant="outline" className="w-full">
+                <Link href={animal.detailsPageUrl}>Saber Más</Link> 
               </Button>
             </CardFooter>
           </Card>
@@ -130,4 +124,3 @@ export default function SpeciesPage() {
     </div>
   );
 }
-
