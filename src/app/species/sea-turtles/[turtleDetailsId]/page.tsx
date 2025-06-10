@@ -96,7 +96,7 @@ export default function TurtleDetailsPage() {
         <CardHeader>
           <CardTitle className="flex items-center">
             <BarChart3 className="mr-2 h-6 w-6 text-primary" />
-            Análisis Futuros
+            Datos Graficados
           </CardTitle>
           <CardDescription>
             Visualizaciones de datos que se añadirán próximamente para {turtleInfo.name}.
