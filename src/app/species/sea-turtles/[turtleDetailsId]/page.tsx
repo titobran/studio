@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { ArrowLeft, Image as ImageIcon, HelpCircle } from 'lucide-react';
+import { ArrowLeft, Image as ImageIcon, HelpCircle, BarChart3 } from 'lucide-react';
 
 // Datos de ejemplo para las especies de tortugas (para obtener el nombre)
 const seaTurtleSpeciesData = [
@@ -87,6 +87,41 @@ export default function TurtleDetailsPage() {
                   Imagen {i}
                 </div>
               ))}
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card className="shadow-xl rounded-xl overflow-hidden">
+        <CardHeader>
+          <CardTitle className="flex items-center">
+            <BarChart3 className="mr-2 h-6 w-6 text-primary" />
+            Análisis Futuros
+          </CardTitle>
+          <CardDescription>
+            Visualizaciones de datos que se añadirán próximamente para {turtleInfo.name}.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div>
+            <h3 className="text-xl font-semibold text-primary mb-1">Crecimiento</h3>
+            <p className="text-sm text-muted-foreground font-medium mb-2">Cómo crece la tortuga a lo largo de los años.</p>
+            <div className="p-4 bg-muted rounded-md text-center text-muted-foreground text-sm">
+              (Aquí se mostrará un gráfico de dispersión en el futuro)
+            </div>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold text-primary mb-1">Supervivencia de Crías</h3>
+            <p className="text-sm text-muted-foreground font-medium mb-2">Cuántas crías llegan al mar en distintas playas.</p>
+            <div className="p-4 bg-muted rounded-md text-center text-muted-foreground text-sm">
+              (Aquí se mostrará un gráfico de líneas en el futuro)
+            </div>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold text-primary mb-1">Amenazas Principales</h3>
+            <p className="text-sm text-muted-foreground font-medium mb-2">Porcentaje de muertes por redes de pesca, contaminación, caza, etc.</p>
+            <div className="p-4 bg-muted rounded-md text-center text-muted-foreground text-sm">
+              (Aquí se mostrará un gráfico de pastel en el futuro)
             </div>
           </div>
         </CardContent>
